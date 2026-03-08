@@ -35,6 +35,7 @@
 | ![](https://github.com/pyratatui/pyratatui/raw/main/gallery/snip_4.png) | ![](https://github.com/pyratatui/pyratatui/raw/main/gallery/snip_5.png) | ![](https://github.com/pyratatui/pyratatui/raw/main/gallery/snip_6.png) |
 | ![](https://github.com/pyratatui/pyratatui/raw/main/gallery/snip_7.png) | ![](https://github.com/pyratatui/pyratatui/raw/main/gallery/snip_8.png) | ![](https://github.com/pyratatui/pyratatui/raw/main/gallery/snip_9.png) |
 | ![](https://github.com/pyratatui/pyratatui/raw/main/gallery/snip_10.png) | ![](https://github.com/pyratatui/pyratatui/raw/main/gallery/snip_11.png) | ![](https://github.com/pyratatui/pyratatui/raw/main/gallery/snip_12.png) |
+| ![](https://github.com/pyratatui/pyratatui/raw/main/gallery/snip_13.png) | ![](https://github.com/pyratatui/pyratatui/raw/main/gallery/snip_14.png) | ![](https://github.com/pyratatui/pyratatui/raw/main/gallery/snip_15.png) |
 
 </div>
 
