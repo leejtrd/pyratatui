@@ -435,7 +435,7 @@ frame.render_textarea(ta, area)
 
 ## 📚 Examples
 
-30 numbered, runnable examples covering every feature:
+30+ (total 33) numbered, runnable examples covering every feature:
 
 | # | File | Demonstrates |
 |:---:|:---|:---|
@@ -465,6 +465,7 @@ frame.render_textarea(ta, area)
 | 24 | `24_dashboard.py` | Full monitoring dashboard |
 | **25** | **`25_calendar.py`** | **`Monthly`, `CalendarEventStore`, navigation** |
 | 26-30 | `26_bar_graph.py` … `30_image_view.py` | BarGraph, Tree, Logger, Image widgets |
+and so on...
 
 ---
 
