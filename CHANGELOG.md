@@ -7,6 +7,10 @@ and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
 
+## [0.2.3] — 2026-03-08
+
+Minor documentation updates. Added musllinux support. No significant changes from the previous release.
+
 ## [0.2.2] — 2026-03-08
 
 ### Summary

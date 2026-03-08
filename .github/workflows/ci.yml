@@ -27,6 +27,16 @@ jobs:
             target: x86_64-unknown-linux-gnu
             os_type: linux
 
+          - name: Linux x86_64 musl
+            runner: ubuntu-latest
+            target: x86_64-unknown-linux-musl
+            os_type: linux-musl
+
+          - name: Linux aarch64 musl
+            runner: ubuntu-latest
+            target: aarch64-unknown-linux-musl
+            os_type: linux-musl
+
           - name: macOS x86_64
             runner: macos-latest
             target: x86_64-apple-darwin
@@ -62,7 +72,7 @@ jobs:
         with:
           python-version: "3.x"
 
-      - name: Build wheel (Linux)
+      - name: Build wheel (Linux glibc)
         if: matrix.os_type == 'linux'
         uses: PyO3/maturin-action@v1
         with:
@@ -72,8 +82,18 @@ jobs:
           manylinux: auto
           args: --release --strip --out dist
 
+      - name: Build wheel (Linux musl)
+        if: matrix.os_type == 'linux-musl'
+        uses: PyO3/maturin-action@v1
+        with:
+          maturin-version: ${{ env.MATURIN_VERSION }}
+          command: build
+          target: ${{ matrix.target }}
+          manylinux: musllinux_1_2
+          args: --release --strip --out dist
+
       - name: Build wheel (macOS / Windows)
-        if: matrix.os_type != 'linux'
+        if: matrix.os_type != 'linux' && matrix.os_type != 'linux-musl'
         uses: PyO3/maturin-action@v1
         with:
           maturin-version: ${{ env.MATURIN_VERSION }}
