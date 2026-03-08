@@ -92,11 +92,10 @@ pip install pyratatui
 
 Pre-built wheels are published to PyPI for:
 
-| Platform | Architecture |
-|---|---|
-| Linux | x86\_64 (manylinux2014) |
-| macOS | x86\_64 and arm64 (universal2) |
-| Windows | x86\_64 |
+- Linux x86\_64 (manylinux2014)
+- Linux x86\_64 and aarch64 (musllinux\_1\_2)
+- macOS x86\_64 (starting from v0.2.2) and arm64 (universal2)
+- Windows x86\_64
 
 If no wheel exists for your platform, `pip` will automatically compile from source (requires Rust — see [Building from Source](#building-from-source)).
 
