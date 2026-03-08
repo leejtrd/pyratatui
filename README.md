@@ -471,37 +471,181 @@ frame.render_textarea(ta, area)
 ## 🏗️ Project Structure
 
 ```
-pyratatui/
-├── Cargo.toml                  # Rust package (v0.2.1)
-├── pyproject.toml              # Python package metadata
-│
-├── src/                        # Rust → Python bindings (PyO3)
-│   ├── lib.rs                  # Extension module entry point
-│   ├── terminal/               # Terminal, Frame, KeyEvent
-│   ├── widgets/                # Block, Paragraph, List, Table, Monthly, …
-│   ├── style/                  # Color, Modifier, Style
-│   ├── text/                   # Span, Line, Text
-│   ├── layout/                 # Rect, Constraint, Direction, Layout
-│   ├── effects/                # TachyonFX bindings
-│   ├── popups/                 # Popup, PopupState, KnownSizeWrapper
-│   ├── textarea/               # TextArea, CursorMove, Scrolling
-│   ├── scrollview/             # ScrollView, ScrollViewState
-│   └── qrcode/                 # QrCodeWidget, QrColors
-│
-├── python/pyratatui/
-│   ├── __init__.py             # Python re-exports
-│   ├── __init__.pyi            # Complete type stubs
-│   ├── async_terminal.py       # AsyncTerminal
-│   └── helpers.py              # run_app, run_app_async
-│
-├── examples/                   # 30 numbered examples (01–30)
-├── docs/                       # MkDocs Material documentation
-├── scripts/
-│   └── build.sh / build.ps1
-│   └── format.sh / format.ps1
-└── tests/
-    ├── python/                 # pytest
-    └── rust/                   # cargo test
+pyratatui
+├── Cargo.toml
+├── CHANGELOG.md
+├── docs
+│   ├── build
+│   │   ├── build_scripts.md
+│   │   └── packaging.md
+│   ├── examples
+│   │   ├── advanced_examples.md
+│   │   └── minimal_examples.md
+│   ├── faq.md
+│   ├── index.md
+│   ├── installation.md
+│   ├── reference
+│   │   ├── api_surface.md
+│   │   ├── bar_graph.md
+│   │   ├── buffer.md
+│   │   ├── calendar.md
+│   │   ├── effects.md
+│   │   ├── image_widget.md
+│   │   ├── layout.md
+│   │   ├── logger.md
+│   │   ├── markdown.md
+│   │   ├── popups.md
+│   │   ├── prompts.md
+│   │   ├── qrcode.md
+│   │   ├── scrollview.md
+│   │   ├── style.md
+│   │   ├── terminal.md
+│   │   ├── text.md
+│   │   ├── textarea.md
+│   │   ├── tree_widget.md
+│   │   └── widgets.md
+│   └── tutorial
+│       ├── async_updates.md
+│       ├── effect_workflow.md
+│       ├── progress_bar.md
+│       ├── quickstart.md
+│       ├── table_updates.md
+│       └── tachyonfx_effects.md
+├── examples
+│   ├── 01_hello_world.py
+│   ├── 02_layout.py
+│   ├── 03_styled_text.py
+│   ├── 04_list_navigation.py
+│   ├── 05_progress_bar.py
+│   ├── 06_table_dynamic.py
+│   ├── 07_async_reactive.py
+│   ├── 08_effects_fade.py
+│   ├── 09_effects_dsl.py
+│   ├── 10_full_app.py
+│   ├── 11_popup_basic.py
+│   ├── 12_popup_stateful.py
+│   ├── 13_popup_scrollable.py
+│   ├── 14_textarea_basic.py
+│   ├── 15_textarea_advanced.py
+│   ├── 16_scrollview.py
+│   ├── 17_qrcode.py
+│   ├── 18_async_progress.py
+│   ├── 19_effects_glitch.py
+│   ├── 20_effects_matrix.py
+│   ├── 21_prompt_confirm.py
+│   ├── 22_prompt_select.py
+│   ├── 23_prompt_text.py
+│   ├── 24_dashboard.py
+│   ├── 25_calendar.py
+│   ├── 26_bar_graph.py
+│   ├── 27_tree_widget.py
+│   ├── 28_markdown_renderer.py
+│   ├── 29_logger_demo.py
+│   ├── 30_image_view.py
+│   ├── 31_canvas_drawing.py
+│   ├── 32_map_widget.py
+│   └── 33_button_widget.py
+├── gallery
+│   ├── alacritty.png
+│   ├── pyratatui.png
+│   ├── snip_1.png
+│   ├── snip_2.png
+│   ├── snip_3.png
+│   ├── snip_4.png
+│   ├── snip_5.png
+│   ├── snip_6.png
+│   ├── snip_7.png
+│   ├── snip_8.png
+│   ├── snip_9.png
+│   ├── snip_10.png
+│   ├── snip_11.png
+│   ├── snip_12.png
+│   ├── snip_13.png
+│   ├── snip_14.png
+│   └── snip_15.png
+├── LICENSE
+├── MIGRATION.md
+├── mkdocs.yml
+├── pyproject.toml
+├── python
+│   └── pyratatui
+│       ├── async_terminal.py
+│       ├── cli.py
+│       ├── helpers.py
+│       └── py.typed
+├── README.md
+├── scripts
+│   ├── build.ps1
+│   ├── build.sh
+│   ├── format.ps1
+│   └── format.sh
+├── src
+│   ├── backend
+│   │   └── mod.rs
+│   ├── bar_graph
+│   │   └── mod.rs
+│   ├── buffer
+│   │   └── mod.rs
+│   ├── button_widget
+│   │   ├── button.rs
+│   │   └── mod.rs
+│   ├── canvas_widget
+│   │   ├── canvas.rs
+│   │   └── mod.rs
+│   ├── effects
+│   │   └── mod.rs
+│   ├── errors
+│   │   └── mod.rs
+│   ├── image_widget
+│   │   └── mod.rs
+│   ├── layout
+│   │   └── mod.rs
+│   ├── lib.rs
+│   ├── logger
+│   │   └── mod.rs
+│   ├── map_widget
+│   │   ├── map.rs
+│   │   └── mod.rs
+│   ├── markdown
+│   │   └── mod.rs
+│   ├── popups
+│   │   └── mod.rs
+│   ├── prompts
+│   │   └── mod.rs
+│   ├── qrcode
+│   │   └── mod.rs
+│   ├── scrollview
+│   │   └── mod.rs
+│   ├── style
+│   │   └── mod.rs
+│   ├── terminal
+│   │   └── mod.rs
+│   ├── text
+│   │   └── mod.rs
+│   ├── textarea
+│   │   └── mod.rs
+│   ├── tree_widget
+│   │   └── mod.rs
+│   └── widgets
+│       ├── barchart.rs
+│       ├── block.rs
+│       ├── calendar.rs
+│       ├── canvas_widget.rs
+│       ├── clear.rs
+│       ├── gauge.rs
+│       ├── list.rs
+│       ├── mod.rs
+│       ├── paragraph.rs
+│       ├── scrollbar.rs
+│       ├── sparkline.rs
+│       ├── table.rs
+│       └── tabs.rs
+├── test_all_examples.py
+└── tests
+    ├── python
+    │   └── test_pyratatui.py
+    └── rust
+        └── lib_tests.rs
 ```
 
 ---
