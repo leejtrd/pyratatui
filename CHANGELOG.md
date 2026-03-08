@@ -321,7 +321,7 @@ Builder methods: `.block()`, `.default_style()`, `.show_surrounding()`,
 
 ---
 
-## [0.2.0] — 2025-03-06
+## [0.2.0] — 2026-03-06
 
 ### Summary
 
@@ -354,7 +354,7 @@ Adds `Block.inner(area)` and fixes all example API mismatches.
 
 ---
 
-## [0.1.3] — 2025-03-06
+## [0.1.3] — 2026-03-06
 
 ### Summary
 

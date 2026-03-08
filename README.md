@@ -1,137 +1,139 @@
 <div align="center">
 
-<img src="https://github.com/pyratatui/pyratatui/raw/main/gallery/pyratatui.png" alt="pyratatui logo" width="110" />
+# 🐀 PyRatatui
 
-# pyratatui
+**Professional Python bindings for [ratatui](https://ratatui.rs) 0.30 — powered by Rust & PyO3**
 
-**Python bindings for [ratatui](https://ratatui.rs) — high-performance terminal UIs, from Python.**
+[![PyPI version](https://img.shields.io/pypi/v/pyratatui?color=orange&logo=pypi&logoColor=white)](https://pypi.org/project/pyratatui/)
+[![Python](https://img.shields.io/pypi/pyversions/pyratatui?logo=python&logoColor=white)](https://pypi.org/project/pyratatui/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green?logo=opensourceinitiative&logoColor=white)](LICENSE)
+[![Ratatui](https://img.shields.io/badge/ratatui-0.30-blueviolet?logo=rust&logoColor=white)](https://github.com/ratatui/ratatui)
+[![PyO3](https://img.shields.io/badge/PyO3-0.28-blue?logo=rust)](https://pyo3.rs)
+[![Platforms](https://img.shields.io/badge/platform-Linux%20%7C%20macOS%20%7C%20Windows-lightgrey)](https://github.com/pyratatui/pyratatui)
+[![asyncio](https://img.shields.io/badge/asyncio-ready-teal?logo=python&logoColor=white)](https://docs.python.org/3/library/asyncio.html)
 
-[![PyPI](https://img.shields.io/pypi/v/pyratatui?style=for-the-badge&logo=pypi&logoColor=white&color=3775A9)](https://pypi.org/project/pyratatui/)
-[![Python](https://img.shields.io/badge/Python-3.10%20→%203.13-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org)
-[![ratatui](https://img.shields.io/badge/ratatui-0.30-E06C00?style=for-the-badge)](https://ratatui.rs)
-[![CI](https://img.shields.io/github/actions/workflow/status/pyratatui/pyratatui/ci.yml?style=for-the-badge&logo=githubactions&logoColor=white&label=CI)](https://github.com/pyratatui/pyratatui/actions)
-[![License](https://img.shields.io/github/license/pyratatui/pyratatui?style=for-the-badge&color=brightgreen)](LICENSE)
+*Build rich, high-performance terminal UIs in Python — with the full power of Rust under the hood.*
 
-<br/>
-
-> **Zero runtime dependencies.** The wheel ships a self-contained native extension  
-> compiled with [PyO3](https://pyo3.rs) 🦀 and [Maturin](https://github.com/PyO3/maturin).
-
-<br/>
-
-[**Quick Start**](#-quick-start) · [**Features**](#-feature-overview) · [**Examples**](#-examples) · [**Docs**](docs/) · [**Contributing**](#-contributing)
+[**Quickstart**](#quickstart) · [**Installation**](#installation) · [**Widgets**](#widget-reference) · [**Effects**](#tachyonfx-effects) · [**Examples**](#examples) · [**API Reference**](#api-reference) · [**Docs**](https://pyratatui.github.io/pyratatui)
 
 </div>
 
 ---
 
-## Gallery
+## 🖼️ Gallery
 
-<div align="center">
-
-| | | |
-|:---:|:---:|:---:|
-| ![](https://github.com/pyratatui/pyratatui/raw/main/gallery/snip_1.png) | ![](https://github.com/pyratatui/pyratatui/raw/main/gallery/snip_2.png) | ![](https://github.com/pyratatui/pyratatui/raw/main/gallery/snip_3.png) |
-| ![](https://github.com/pyratatui/pyratatui/raw/main/gallery/snip_4.png) | ![](https://github.com/pyratatui/pyratatui/raw/main/gallery/snip_5.png) | ![](https://github.com/pyratatui/pyratatui/raw/main/gallery/snip_6.png) |
-| ![](https://github.com/pyratatui/pyratatui/raw/main/gallery/snip_7.png) | ![](https://github.com/pyratatui/pyratatui/raw/main/gallery/snip_8.png) | ![](https://github.com/pyratatui/pyratatui/raw/main/gallery/snip_9.png) |
-| ![](https://github.com/pyratatui/pyratatui/raw/main/gallery/snip_10.png) | ![](https://github.com/pyratatui/pyratatui/raw/main/gallery/snip_11.png) | ![](https://github.com/pyratatui/pyratatui/raw/main/gallery/snip_12.png) |
-| ![](https://github.com/pyratatui/pyratatui/raw/main/gallery/snip_13.png) | ![](https://github.com/pyratatui/pyratatui/raw/main/gallery/snip_14.png) | ![](https://github.com/pyratatui/pyratatui/raw/main/gallery/snip_15.png) |
-
-</div>
-
----
-
-## Overview
-
-**pyratatui** wraps the full **ratatui 0.30** widget library — including the new Calendar widget — plus the **tachyonfx animation engine** and **five third-party widget integrations**, all exposed through a clean, typed, idiomatic Python API.
-
-It targets Python developers who want the rendering power and performance of Rust's leading TUI framework without writing a single line of Rust.
-
-- 🏎️ **Native performance** — PyO3/Maturin compiled extension, no Python overhead in the render path
-- 🎨 **Full ratatui parity** — every widget, layout primitive, and style option from ratatui 0.30
-- ⚡ **Async-first** — `AsyncTerminal` with `async for ev in term.events(fps=30)`
-- 🔒 **Typed** — complete `.pyi` stubs for IDE autocompletion and mypy
-
----
-
-## ✨ What's New in 0.2.2
-
-| Feature | Type | Description |
-|:---|:---|:---|
-| 🎨 **Canvas** | Widget | Draw lines, points, and rectangles with ratatui canvas primitives |
-| 🗺️ **Map** | Widget | Render world map with `MapResolution.Low` / `MapResolution.High` |
-| 🔘 **Button** | Widget | Focus-aware button rendering with keyboard handling |
-| 🚀 **CLI Tool** | Tool | `pyratatui init <project>` for scaffolding new projects |
-| 📝 **3 New Examples** | Examples | Canvas, Map, and Button widget demonstrations |
-
-### CLI Quick Start
-
-```bash
-# Create a new project
-pyratatui init my_tui_app
-cd my_tui_app
-
-# Install and run
-pip install -r requirements.txt
-python main.py
-```
-
-The generated project includes:
-- `main.py` — Entry point with a working example
-- `app.py` — Application state management pattern
-- `requirements.txt` — Minimal dependencies
-- `README.md` — Project documentation
+<table>
+  <tr>
+    <td align="center" width="33%"><img src="gallery/snip_1.png" alt="Widget showcase" width="100%"/></td>
+    <td align="center" width="33%"><img src="gallery/snip_2.png" alt="Layout panels" width="100%"/></td>
+    <td align="center" width="33%"><img src="gallery/snip_3.png" alt="Styled text" width="100%"/></td>
+  </tr>
+  <tr>
+    <td align="center" width="33%"><img src="gallery/snip_4.png" alt="List navigation" width="100%"/></td>
+    <td align="center" width="33%"><img src="gallery/snip_5.png" alt="Progress bars" width="100%"/></td>
+    <td align="center" width="33%"><img src="gallery/snip_6.png" alt="Dynamic table" width="100%"/></td>
+  </tr>
+  <tr>
+    <td align="center" width="33%"><img src="gallery/snip_7.png" alt="Async reactive UI" width="100%"/></td>
+    <td align="center" width="33%"><img src="gallery/snip_8.png" alt="TachyonFX effects" width="100%"/></td>
+    <td align="center" width="33%"><img src="gallery/snip_9.png" alt="Effect DSL" width="100%"/></td>
+  </tr>
+  <tr>
+    <td align="center" width="33%"><img src="gallery/snip_10.png" alt="Full app dashboard" width="100%"/></td>
+    <td align="center" width="33%"><img src="gallery/snip_11.png" alt="Popup widget" width="100%"/></td>
+    <td align="center" width="33%"><img src="gallery/snip_12.png" alt="Draggable popup" width="100%"/></td>
+  </tr>
+  <tr>
+    <td align="center" width="33%"><img src="gallery/snip_13.png" alt="Scrollable popup" width="100%"/></td>
+    <td align="center" width="33%"><img src="gallery/snip_14.png" alt="TextArea editor" width="100%"/></td>
+    <td align="center" width="33%"><img src="gallery/snip_15.png" alt="ScrollView" width="100%"/></td>
+  </tr>
+</table>
 
 ---
 
-## ✨ What's New in 0.2.1
+## What is PyRatatui?
 
-| Widget | Source | Description |
-|:---|:---|:---|
-| 📊 **BarGraph** | `tui-bar-graph` | Colorful gradient bar graphs |
-| 🌲 **Tree** | `tui-tree-widget` | Interactive hierarchical tree view |
-| 📝 **Markdown** | `tui-markdown` | `markdown_to_text()` → styled `Text` |
-| 📜 **Logger** | `tui-logger` | Real-time log viewer widget |
-| 🖼️ **Image** | `ratatui-image` | Sixel / kitty / halfblock image display |
-| 📅 **Calendar** | ratatui core | `Monthly`, `CalendarDate`, `CalendarEventStore` |
-| 🔢 **30 Examples** | — | `01_hello_world.py` → `30_image_view.py` |
+PyRatatui exposes the entire [ratatui](https://ratatui.rs) Rust TUI library to Python via a thin, zero-overhead [PyO3](https://pyo3.rs) extension module. You get:
+
+- **Pixel-perfect terminal rendering** from ratatui's battle-tested Rust layout engine
+- **30+ widgets** out of the box: gauges, tables, trees, calendars, QR codes, images, markdown, and more
+- **TachyonFX animations** — fade, sweep, glitch, dissolve, and composable effect pipelines
+- **Async-native** — `AsyncTerminal` + `asyncio` integration for live, reactive UIs
+- **Full type stubs** — every class and method ships with `.pyi` annotations for IDE autocomplete
+- **Cross-platform** — Linux, macOS, and Windows (pre-built wheels on PyPI for all three)
 
 ---
 
-## 📦 Installation
+## Table of Contents
+
+- [Installation](#installation)
+- [Quickstart](#quickstart)
+- [Core Concepts](#core-concepts)
+- [Widget Reference](#widget-reference)
+- [TachyonFX Effects](#tachyonfx-effects)
+- [Async & Reactive UIs](#async--reactive-uis)
+- [CLI Tool](#cli-tool)
+- [API Reference](#api-reference)
+- [Examples](#examples)
+- [Building from Source](#building-from-source)
+- [Contributing](#contributing)
+- [License](#license)
+
+---
+
+## Installation
+
+### Recommended — Pre-built Wheel
 
 ```bash
 pip install pyratatui
 ```
 
-Pre-built wheels on PyPI for:
+Pre-built wheels are published to PyPI for:
 
-| Platform | Architectures |
-|:---|:---|
-| **Linux** | x86_64 |
-| **macOS** | x86_64 (starting from v0.2.2), arm64 (Apple Silicon) |
-| **Windows** | x86_64 |
+| Platform | Architecture |
+|---|---|
+| Linux | x86\_64 (manylinux2014) |
+| macOS | x86\_64 and arm64 (universal2) |
+| Windows | x86\_64 |
 
-**Python 3.10 – 3.13** supported.
+If no wheel exists for your platform, `pip` will automatically compile from source (requires Rust — see [Building from Source](#building-from-source)).
 
-<details>
-<summary><strong>🔧 Build from source</strong> (requires Rust stable + Maturin)</summary>
+### Virtual Environment (Best Practice)
 
 ```bash
-pip install maturin
-git clone https://github.com/pyratatui/pyratatui.git
-cd pyratatui
-maturin develop --release
+python -m venv .venv
+source .venv/bin/activate        # Linux / macOS
+# .venv\Scripts\activate         # Windows PowerShell
+
+pip install pyratatui
 ```
 
-</details>
+### Requirements
+
+| Requirement | Minimum | Notes |
+|---|---|---|
+| Python | 3.10 | 3.11+ recommended |
+| OS | Linux, macOS, Windows | crossterm backend |
+| Rust | 1.75 | source builds only |
+
+### Verify
+
+```python
+import pyratatui
+print(pyratatui.__version__)          # "0.2.2"
+print(pyratatui.__ratatui_version__)  # "0.30"
+```
 
 ---
 
-## 🚀 Quick Start
+## Quickstart
+
+### Hello World
 
 ```python
-from pyratatui import Terminal, Paragraph, Block, Style, Color
+from pyratatui import Block, Color, Paragraph, Style, Terminal
 
 with Terminal() as term:
     while True:
@@ -148,544 +150,851 @@ with Terminal() as term:
             break
 ```
 
----
+Output:
+```
+┌ Hello World ────────────────────────────────────────────┐
+│ Hello, pyratatui! 🐀  Press q to quit.                  │
+└─────────────────────────────────────────────────────────┘
+```
 
-## 🗺️ Feature Overview
+### Scaffold a New Project
 
-| Category | Details |
-|:---|:---|
-| **Widgets** | `Block`, `Paragraph`, `List`, `Table`, `Gauge`, `LineGauge`, `BarChart`, `Sparkline`, `Tabs`, `Scrollbar`, `Clear`, `Monthly` |
-| **Third-party** | `BarGraph`, `Tree`, `Logger`, `Image` (sixel/kitty/halfblocks), Markdown renderer |
-| **Layout** | Constraint-based splits (length, %, fill, min, max, ratio), flex modes, margins, spacing |
-| **Styling** | 16 named + 256-indexed + RGB true-colour, 9 text modifiers, immutable builder pattern |
-| **Text** | `Span` → `Line` → `Text` hierarchy with per-span styling and alignment |
-| **Async** | `AsyncTerminal` with `async for ev in term.events(fps=30)` |
-| **Effects** | tachyonfx — fade, dissolve, coalesce, slide, sweep, sequence, parallel, ping-pong |
-| **Prompts** | `TextPrompt`, `PasswordPrompt` with live validation |
-| **Popups** | `Popup`, `PopupState` — floating centered dialogs, draggable |
-| **TextArea** | Full multi-line editor (Emacs bindings, undo/redo, search) |
-| **ScrollView** | `ScrollView`, `ScrollViewState` — scrollable content viewport |
-| **QR Codes** | `QrCodeWidget`, `QrColors` — terminal QR via Unicode half-blocks |
-| **Calendar** | `Monthly`, `CalendarDate`, `CalendarEventStore` |
-| **Type stubs** | Complete `.pyi` for IDE completion and mypy |
+```bash
+pyratatui init my_app
+cd my_app
+pip install -r requirements.txt
+python main.py
+```
 
----
-
-## 📐 Layout & Widgets
+### Ultra-Minimal — `run_app` Helper
 
 ```python
-from pyratatui import (
-    Terminal, Layout, Constraint, Direction,
-    Block, Paragraph, List, ListItem, ListState,
-)
+from pyratatui import Paragraph, run_app
 
-with Terminal() as term:
-    list_state = ListState()
-    while True:
-        def ui(frame):
-            chunks = (
-                Layout()
-                .direction(Direction.Vertical)
-                .constraints([
-                    Constraint.length(3),
-                    Constraint.fill(1),
-                    Constraint.length(1),
-                ])
-                .split(frame.area)
-            )
-            frame.render_widget(
-                Paragraph.from_string("My App").centered()
-                    .block(Block().bordered().title(" Header ")),
-                chunks[0],
-            )
-            frame.render_stateful_list(
-                List([ListItem("Item A"), ListItem("Item B"), ListItem("Item C")]),
-                chunks[1],
-                list_state,
-            )
-            frame.render_widget(
-                Paragraph.from_string("  q: quit  ↑/↓: navigate"),
-                chunks[2],
-            )
-        term.draw(ui)
-        ev = term.poll_event(timeout_ms=100)
-        if ev:
-            if ev.code == "q":      break
-            elif ev.code == "Down": list_state.select_next()
-            elif ev.code == "Up":   list_state.select_previous()
+def ui(frame):
+    frame.render_widget(
+        Paragraph.from_string("Hello! Press q to quit."),
+        frame.area,
+    )
+
+run_app(ui)
 ```
 
 ---
 
-## ⚡ Async
+## Core Concepts
+
+### Terminal & Frame
+
+`Terminal` is the entry point. Use it as a context manager — it saves the terminal state, enters alternate screen mode, enables raw input, and restores everything on exit (even after exceptions).
+
+```python
+with Terminal() as term:
+    term.draw(lambda frame: ...)    # render one frame
+    ev = term.poll_event(timeout_ms=50)  # KeyEvent | None
+```
+
+`Frame` is passed to every render callback. It holds the drawable area and all render methods:
+
+```python
+def ui(frame):
+    area = frame.area  # Rect — full terminal size
+    frame.render_widget(widget, area)
+```
+
+### Layout
+
+`Layout` divides a `Rect` into child regions using constraints:
+
+```python
+from pyratatui import Layout, Constraint, Direction
+
+chunks = (
+    Layout()
+    .direction(Direction.Vertical)
+    .constraints([
+        Constraint.length(3),   # fixed 3 rows
+        Constraint.fill(1),     # takes remaining space
+        Constraint.length(1),   # fixed 1 row
+    ])
+    .split(frame.area)
+)
+header, body, footer = chunks
+```
+
+**Constraint types:**
+
+| Constraint | Description |
+|---|---|
+| `Constraint.length(n)` | Exactly `n` rows/columns |
+| `Constraint.percentage(pct)` | `pct`% of available space |
+| `Constraint.fill(n)` | Fill remaining space (proportionally weighted) |
+| `Constraint.min(n)` | At least `n` rows/columns |
+| `Constraint.max(n)` | At most `n` rows/columns |
+| `Constraint.ratio(num, den)` | Fractional proportion |
+
+### Styling
+
+All styling flows through `Style`, `Color`, and `Modifier`:
+
+```python
+from pyratatui import Style, Color, Modifier
+
+style = (
+    Style()
+    .fg(Color.cyan())
+    .bg(Color.rgb(30, 30, 46))
+    .bold()
+    .italic()
+)
+
+# Named colors
+Color.red()    Color.green()    Color.yellow()
+Color.blue()   Color.magenta()  Color.cyan()
+Color.white()  Color.gray()     Color.dark_gray()
+# Light variants: Color.light_red(), Color.light_green(), ...
+# 256-color: Color.indexed(42)
+# True-color: Color.rgb(255, 100, 0)
+```
+
+### Text Hierarchy
+
+Text is composed bottom-up: `Span` → `Line` → `Text`:
+
+```python
+from pyratatui import Text, Line, Span, Style, Color
+
+text = Text([
+    Line([
+        Span("Status: ", Style().bold()),
+        Span("OK", Style().fg(Color.green())),
+        Span("  |  99.9%", Style().fg(Color.cyan())),
+    ]),
+    Line.from_string("Plain text line"),
+    Line.from_string("Right-aligned").right_aligned(),
+])
+
+frame.render_widget(Paragraph(text).block(Block().bordered()), area)
+```
+
+### Key Events
+
+```python
+ev = term.poll_event(timeout_ms=100)
+if ev:
+    print(ev.code)   # "q", "Enter", "Up", "Down", "F1", etc.
+    print(ev.ctrl)   # True if Ctrl held
+    print(ev.alt)    # True if Alt held
+    print(ev.shift)  # True if Shift held
+
+# Common key codes
+# Letters/digits: "a", "Z", "5"
+# Special:        "Enter", "Esc", "Backspace", "Tab", "BackTab"
+# Arrows:         "Up", "Down", "Left", "Right"
+# Function:       "F1" … "F12"
+# Ctrl+C:         ev.code == "c" and ev.ctrl
+```
+
+> **Tip — Closure Capture:** Always snapshot mutable state into default arguments to avoid late-binding issues in fast render loops:
+> ```python
+> count = state["count"]
+> def ui(frame, _count=count):  # ← captured by value, not reference
+>     ...
+> ```
+
+---
+
+## Widget Reference
+
+### Standard Widgets
+
+| Widget | Description |
+|---|---|
+| `Paragraph` | Single or multi-line text, wrapping, scrolling |
+| `Block` | Bordered container with title, padding, and style |
+| `List` + `ListState` | Scrollable, selectable list |
+| `Table` + `TableState` | Multi-column table with header and footer |
+| `Gauge` | Filled progress bar |
+| `LineGauge` | Single-line progress indicator |
+| `BarChart` | Grouped vertical bar chart |
+| `Sparkline` | Inline sparkline trend chart |
+| `Scrollbar` + `ScrollbarState` | Attach scrollbars to any widget |
+| `Tabs` | Tabbed navigation bar |
+| `Clear` | Clears a rectangular area (use under popups) |
+
+**Quick examples:**
+
+```python
+# Gauge
+Gauge().percent(75).label("CPU 75%").style(Style().fg(Color.green()))
+
+# Navigable list
+list_state = ListState()
+list_state.select(0)
+items = [ListItem(s) for s in ["Alpha", "Beta", "Gamma"]]
+frame.render_stateful_list(
+    List(items).highlight_style(Style().fg(Color.yellow()).bold()),
+    area, list_state,
+)
+
+# Table
+header = Row.from_strings(["Name", "Status", "Uptime"])
+rows = [Row.from_strings(["nginx", "✓ running", "14d"]), ...]
+frame.render_stateful_table(
+    Table(rows, [Constraint.fill(1)] * 3, header=header),
+    area, table_state,
+)
+
+# Sparkline
+Sparkline().data([10, 40, 20, 80, 55, 90]).max(100).style(Style().fg(Color.cyan()))
+
+# Tabs
+Tabs(["Overview", "Logs", "Config"]).select(1).highlight_style(Style().fg(Color.yellow()))
+```
+
+### Third-Party Widgets
+
+| Widget | Crate | Description |
+|---|---|---|
+| `Popup` / `PopupState` | `tui-popup` | Centered or draggable popups |
+| `TextArea` | `tui-textarea` | Full multi-line editor (Emacs keybindings, undo/redo) |
+| `ScrollView` / `ScrollViewState` | `tui-scrollview` | Scrollable virtual viewport |
+| `QrCodeWidget` | `tui-qrcode` | QR codes rendered in Unicode block characters |
+| `Monthly` / `CalendarDate` | `ratatui widget-calendar` | Monthly calendar with event styling |
+| `BarGraph` | `tui-bar-graph` | Gradient braille/block bar graphs |
+| `Tree` / `TreeState` | `tui-tree-widget` | Collapsible tree view |
+| `TuiLoggerWidget` | `tui-logger` | Live scrolling log viewer |
+| `ImageWidget` / `ImagePicker` | `ratatui-image` | Terminal image rendering |
+| `Canvas` | `ratatui` | Low-level line/point/rect drawing |
+| `Map` | `ratatui` | World map widget |
+| `Button` | built-in | Focus-aware interactive button |
+
+**Third-party widget examples:**
+
+```python
+# Popup (stateful / draggable)
+from pyratatui import Popup, PopupState, Style, Color
+
+popup = Popup("Press any key to dismiss").title("Info").style(Style().bg(Color.blue()))
+state = PopupState()
+frame.render_stateful_popup(popup, frame.area, state)
+
+# TextArea (multi-line editor)
+from pyratatui import TextArea, Terminal
+
+ta = TextArea.from_lines(["Hello", "World"])
+ta.set_placeholder_text("Start typing…")
+# inside loop:
+frame.render_textarea(ta, area)
+# forward key events:
+ta.input_key(ev.code, ev.ctrl, ev.alt, ev.shift)
+
+# QR Code
+from pyratatui import QrCodeWidget, QrColors
+qr = QrCodeWidget("https://ratatui.rs").colors(QrColors.Inverted)
+frame.render_qrcode(qr, area)
+
+# Calendar
+from pyratatui import CalendarDate, CalendarEventStore, Monthly
+store = CalendarEventStore.today_highlighted(Style().fg(Color.green()).bold())
+cal = (Monthly(CalendarDate.today(), store)
+       .show_month_header(Style().bold())
+       .show_weekdays_header(Style().italic()))
+frame.render_widget(cal, area)
+
+# Gradient bar graph
+from pyratatui import BarGraph, BarGraphStyle, BarColorMode
+graph = (BarGraph([0.1, 0.4, 0.9, 0.6, 0.8])
+         .bar_style(BarGraphStyle.Braille)
+         .color_mode(BarColorMode.VerticalGradient)
+         .gradient("turbo"))
+frame.render_widget(graph, area)
+
+# Markdown rendering
+from pyratatui import markdown_to_text, Paragraph
+text = markdown_to_text("# Hello\n\n**bold** _italic_ `code`")
+frame.render_widget(Paragraph(text), area)
+
+# Tree widget
+from pyratatui import Tree, TreeItem, TreeState
+items = [
+    TreeItem("src", [TreeItem("main.rs"), TreeItem("lib.rs")]),
+    TreeItem("Cargo.toml"),
+]
+tree = Tree(items).block(Block().bordered().title(" Files "))
+state = TreeState()
+frame.render_stateful_tree(tree, area, state)
+```
+
+---
+
+## TachyonFX Effects
+
+PyRatatui ships the full [tachyonfx](https://github.com/junkdog/tachyonfx) effects engine. Effects are post-render transforms that mutate the frame buffer — always apply them *after* rendering your widgets.
+
+### Effect Types
+
+| Effect | Description |
+|---|---|
+| `Effect.fade_from_fg(color, ms)` | Fade text from a color into its natural color |
+| `Effect.fade_to_fg(color, ms)` | Fade text out to a flat color |
+| `Effect.fade_from(bg, fg, ms)` | Fade both background and foreground from color |
+| `Effect.fade_to(bg, fg, ms)` | Fade both background and foreground to color |
+| `Effect.coalesce(ms)` | Characters materialize in from random positions |
+| `Effect.dissolve(ms)` | Characters scatter and dissolve |
+| `Effect.slide_in(direction, ms)` | Slide content in from an edge |
+| `Effect.slide_out(direction, ms)` | Slide content out to an edge |
+| `Effect.sweep_in(dir, span, grad, color, ms)` | Gradient sweep reveal |
+| `Effect.sweep_out(dir, span, grad, color, ms)` | Gradient sweep hide |
+| `Effect.sequence(effects)` | Run effects one after another |
+| `Effect.parallel(effects)` | Run effects simultaneously |
+| `Effect.sleep(ms)` | Delay before next effect in a sequence |
+| `Effect.repeat(effect, times=-1)` | Loop an effect (−1 = forever) |
+| `Effect.ping_pong(effect)` | Play an effect forward then backward |
+| `Effect.never_complete(effect)` | Keep an effect alive indefinitely |
+
+### Interpolations
+
+`Interpolation.Linear`, `QuadIn/Out/InOut`, `CubicIn/Out/InOut`, `SineIn/Out/InOut`,
+`CircIn/Out/InOut`, `ExpoIn/Out/InOut`, `ElasticIn/Out`, `BounceIn/Out/BounceInOut`, `BackIn/Out/BackInOut`
+
+### Basic Effect Usage
+
+```python
+import time
+from pyratatui import Effect, EffectManager, Interpolation, Color, Terminal, Paragraph
+
+mgr = EffectManager()
+mgr.add(Effect.fade_from_fg(Color.black(), 1000, Interpolation.SineOut))
+last = time.monotonic()
+
+with Terminal() as term:
+    while not (ev := term.poll_event(timeout_ms=16)) or ev.code != "q":
+        now = time.monotonic()
+        elapsed_ms = int((now - last) * 1000)
+        last = now
+
+        def ui(frame, _mgr=mgr, _ms=elapsed_ms):
+            # Step 1 — render widgets
+            frame.render_widget(Paragraph.from_string("Fading in…"), frame.area)
+            # Step 2 — apply effects to the same buffer
+            frame.apply_effect_manager(_mgr, _ms, frame.area)
+
+        term.draw(ui)
+```
+
+### Effect DSL
+
+Compile tachyonfx expressions at runtime — perfect for config-driven or user-customisable animations:
+
+```python
+from pyratatui import compile_effect, EffectManager
+
+# DSL mirrors the Rust / tachyonfx expression syntax
+effect = compile_effect("fx::coalesce(500)")
+effect = compile_effect("fx::dissolve((800, BounceOut))")
+effect = compile_effect("fx::fade_from_fg(Color::Black, (600, QuadOut))")
+effect = compile_effect("fx::sweep_in(LeftToRight, 10, 5, Color::Black, (700, SineOut))")
+
+mgr = EffectManager()
+mgr.add(effect)
+```
+
+### Cell Filters
+
+Target effects at specific cells:
+
+```python
+from pyratatui import CellFilter, Effect, Color
+
+effect = Effect.fade_from_fg(Color.black(), 800)
+effect.with_filter(CellFilter.text())                           # text cells only
+effect.with_filter(CellFilter.inner(horizontal=1, vertical=1)) # inner area
+effect.with_filter(CellFilter.fg_color(Color.cyan()))          # specific fg color
+effect.with_filter(CellFilter.any_of([CellFilter.text(), CellFilter.all()]))
+```
+
+---
+
+## Async & Reactive UIs
+
+Use `AsyncTerminal` to combine rendering with background `asyncio` tasks:
 
 ```python
 import asyncio
-from pyratatui import AsyncTerminal, Paragraph, Block, Style, Color
+from pyratatui import AsyncTerminal, Gauge, Block, Style, Color
+
+state = {"progress": 0}
+
+async def background_worker():
+    while state["progress"] < 100:
+        await asyncio.sleep(0.1)
+        state["progress"] += 2
+
+async def main():
+    worker = asyncio.create_task(background_worker())
+
+    async with AsyncTerminal() as term:
+        async for ev in term.events(fps=30):
+            pct = state["progress"]
+
+            def ui(frame, _pct=pct):
+                frame.render_widget(
+                    Gauge()
+                    .percent(_pct)
+                    .label(f"Loading… {_pct}%")
+                    .style(Style().fg(Color.green()))
+                    .block(Block().bordered().title("Progress")),
+                    frame.area,
+                )
+
+            term.draw(ui)
+
+            if ev and ev.code == "q":
+                break
+            if pct >= 100:
+                break
+
+    worker.cancel()
+
+asyncio.run(main())
+```
+
+### `AsyncTerminal.events()` Parameters
+
+```python
+async for ev in term.events(fps=30.0, stop_on_quit=True):
+    # ev is KeyEvent | None
+    # None emitted each tick (use for animations / periodic updates)
+    # stop_on_quit=True exits the loop automatically on "q"
+```
+
+### `run_app` / `run_app_async` Helpers
+
+For simpler apps that don't need manual task management:
+
+```python
+from pyratatui import run_app, run_app_async, Paragraph
+
+# Synchronous
+run_app(lambda frame: frame.render_widget(
+    Paragraph.from_string("Hello!"), frame.area
+))
+
+# Asynchronous
+import asyncio
 
 async def main():
     tick = 0
-    async with AsyncTerminal() as term:
-        async for ev in term.events(fps=30, stop_on_quit=True):
-            tick += 1
-            def ui(frame, t=tick):
-                frame.render_widget(
-                    Paragraph.from_string(f"Tick {t} — press q to quit")
-                        .block(Block().bordered())
-                        .style(Style().fg(Color.green())),
-                    frame.area,
-                )
-            term.draw(ui)
+    def ui(frame):
+        nonlocal tick
+        frame.render_widget(Paragraph.from_string(f"Tick: {tick}"), frame.area)
+        tick += 1
+    await run_app_async(ui, fps=30, on_key=lambda ev: ev.code == "q")
 
 asyncio.run(main())
 ```
 
 ---
 
-## 🎬 TachyonFX Animations
+## CLI Tool
 
-```python
-from pyratatui import Terminal, Paragraph, Block, EffectManager, Motion, Interpolation
+PyRatatui ships a `pyratatui` CLI for project scaffolding and version inspection.
 
-manager = EffectManager()
-manager.add(
-    "fade",
-    "fade_from_fg #000000 300ms; then sweep_in_from_left 500ms",
-)
+```
+Usage: pyratatui [COMMAND]
 
-with Terminal() as term:
-    start = __import__("time").time()
-    while True:
-        def ui(frame):
-            elapsed = int((__import__("time").time() - start) * 1000)
-            frame.render_widget(
-                Paragraph.from_string("Animated!").block(Block().bordered()),
-                frame.area,
-            )
-            frame.apply_effect_manager(manager, elapsed, frame.area)
-        term.draw(ui)
-        ev = term.poll_event(timeout_ms=16)
-        if ev and ev.code == "q":
-            break
+Commands:
+  init     Create a new PyRatatui project scaffold
+  version  Show PyRatatui version
+
+Options:
+  --help   Show help message
 ```
 
-<details>
-<summary><strong>Available effects</strong></summary>
+### `pyratatui init`
 
-| Effect | DSL keyword |
-|:---|:---|
-| Fade in/out | `fade_from_fg`, `fade_to_fg` |
-| Dissolve | `dissolve` |
-| Coalesce | `coalesce` |
-| Slide | `slide_in`, `slide_out` |
-| Sweep | `sweep_in_from_left`, `sweep_in_from_right`, … |
-| Sequence | `effect_a; then effect_b` |
-| Parallel | `effect_a | effect_b` |
-| Ping-pong | `ping_pong(effect)` |
+```bash
+pyratatui init my_tui_app [--verbose]
+```
 
-</details>
+Creates a ready-to-run project:
 
----
-
-## 📅 Calendar Widget
-
-```python
-from pyratatui import CalendarDate, CalendarEventStore, Monthly, Block, Style, Color, Terminal
-
-store = CalendarEventStore.today_highlighted(Style().fg(Color.green()).bold())
-store.add(CalendarDate.from_ymd(2024, 12, 25), Style().fg(Color.red()).bold())
-
-cal = (
-    Monthly(CalendarDate.today(), store)
-    .block(Block().bordered().title(" December 2024 "))
-    .show_month_header(Style().bold().fg(Color.cyan()))
-    .show_weekdays_header(Style().italic())
-    .show_surrounding(Style().dim())
-    .default_style(Style().fg(Color.white()))
-)
-
-with Terminal() as term:
-    term.draw(lambda frame: frame.render_widget(cal, frame.area))
-    term.poll_event(timeout_ms=10_000)
+```
+my_tui_app/
+├── main.py           # runnable hello world starter
+├── requirements.txt  # pyratatui dependency
+└── README.md         # project docs
 ```
 
 ```bash
-python examples/25_calendar.py
-# ←/→: prev/next month   ↑/↓: prev/next year   t: today   q: quit
+cd my_tui_app
+pip install -r requirements.txt
+python main.py
+```
+
+### `pyratatui version`
+
+```bash
+pyratatui version
+# PyRatatui 0.2.2
 ```
 
 ---
 
-## 🖼️ QR Code Widget
+## API Reference
+
+### Terminal
 
 ```python
-from pyratatui import QrCodeWidget, QrColors, Block, Terminal
-
-qr = QrCodeWidget("https://ratatui.rs").colors(QrColors.Inverted)
-
-with Terminal() as term:
-    while True:
-        def ui(frame, _qr=qr):
-            blk = Block().bordered().title(" QR Code ")
-            inner = blk.inner(frame.area)
-            frame.render_widget(blk, frame.area)
-            frame.render_qrcode(_qr, inner)
-        term.draw(ui)
-        ev = term.poll_event(timeout_ms=30_000)
-        if ev and ev.code in ("q", "Esc"):
-            break
+class Terminal:
+    def __enter__(self) -> Terminal
+    def __exit__(self, ...) -> bool
+    def draw(self, draw_fn: Callable[[Frame], None]) -> None
+    def poll_event(self, timeout_ms: int = 0) -> KeyEvent | None
+    def area(self) -> Rect
+    def clear(self) -> None
+    def hide_cursor(self) -> None
+    def show_cursor(self) -> None
+    def restore(self) -> None
 ```
 
----
-
-## ✏️ TextArea Editor
+### AsyncTerminal
 
 ```python
-from pyratatui import TextArea, Block, Terminal
-
-ta = TextArea.from_lines(["Edit this text...", "Line two"])
-ta.set_block(Block().bordered().title(" Editor "))
-
-with Terminal() as term:
-    while True:
-        def ui(frame, _ta=ta):
-            frame.render_textarea(_ta, frame.area)
-        term.draw(ui)
-        ev = term.poll_event(timeout_ms=100)
-        if ev:
-            if ev.ctrl and ev.code == "c":
-                break
-            ta.input_key(ev.code, ev.ctrl, ev.alt, ev.shift)
+class AsyncTerminal:
+    async def __aenter__(self) -> AsyncTerminal
+    async def __aexit__(self, ...) -> bool
+    def draw(self, draw_fn: Callable[[Frame], None]) -> None
+    async def poll_event(self, timeout_ms: int = 50) -> KeyEvent | None
+    async def events(self, fps: float = 30.0, *, stop_on_quit: bool = True) -> AsyncIterator[KeyEvent | None]
+    def area(self) -> Rect
+    def clear(self) -> None
+    def hide_cursor(self) -> None
+    def show_cursor(self) -> None
 ```
 
-> Supports Emacs key bindings, undo/redo, and incremental search out of the box.
-
----
-
-## 📜 ScrollView
+### Frame
 
 ```python
-from pyratatui import ScrollView, ScrollViewState, Terminal
+class Frame:
+    @property
+    def area(self) -> Rect
 
-lines = [f"Line {i:>4}:  " + "█" * (i % 40) for i in range(200)]
-state = ScrollViewState()
+    # Standard widgets (stateless)
+    def render_widget(self, widget: object, area: Rect) -> None
 
-with Terminal() as term:
-    while True:
-        def ui(frame, _lines=lines):
-            sv = ScrollView.from_lines(_lines, content_width=80)
-            frame.render_stateful_scrollview(sv, frame.area, state)
-        term.draw(ui)
-        ev = term.poll_event(timeout_ms=100)
-        if ev:
-            if ev.code == "q":      break
-            elif ev.code == "Down": state.scroll_down(1)
-            elif ev.code == "Up":   state.scroll_up(1)
+    # Stateful widgets
+    def render_stateful_list(self, widget: List, area: Rect, state: ListState) -> None
+    def render_stateful_table(self, widget: Table, area: Rect, state: TableState) -> None
+    def render_stateful_scrollbar(self, widget: Scrollbar, area: Rect, state: ScrollbarState) -> None
+
+    # Popups
+    def render_popup(self, popup: Popup, area: Rect) -> None
+    def render_stateful_popup(self, popup: Popup, area: Rect, state: PopupState) -> None
+
+    # Text editor
+    def render_textarea(self, ta: TextArea, area: Rect) -> None
+
+    # Scroll view
+    def render_stateful_scrollview(self, sv: ScrollView, area: Rect, state: ScrollViewState) -> None
+
+    # QR code
+    def render_qrcode(self, qr: QrCodeWidget, area: Rect) -> None
+
+    # Effects
+    def apply_effect(self, effect: Effect, elapsed_ms: int, area: Rect) -> None
+    def apply_effect_manager(self, manager: EffectManager, elapsed_ms: int, area: Rect) -> None
+
+    # Prompts
+    def render_text_prompt(self, prompt: TextPrompt, area: Rect, state: TextState) -> None
+    def render_password_prompt(self, prompt: PasswordPrompt, area: Rect, state: TextState) -> None
 ```
 
----
-
-## 📋 Cheat Sheet
-
-<details>
-<summary><strong>Expand API quick reference</strong></summary>
+### Layout & Geometry
 
 ```python
-# ── Style ──────────────────────────────────────────────────────────────────
-Style().fg(Color.cyan()).bg(Color.black()).bold().italic().dim()
+class Layout:
+    def constraints(self, constraints: list[Constraint]) -> Layout
+    def direction(self, direction: Direction) -> Layout
+    def margin(self, margin: int) -> Layout
+    def spacing(self, spacing: int) -> Layout
+    def flex_mode(self, mode: str) -> Layout
+    def split(self, area: Rect) -> list[Rect]
 
-# ── Layout ─────────────────────────────────────────────────────────────────
-Layout().direction(Direction.Vertical).constraints([
-    Constraint.length(3),
-    Constraint.fill(1),
-    Constraint.percentage(30),
-    Constraint.min(5),
-    Constraint.max(20),
-]).split(frame.area)
-
-# ── Block with inner area ──────────────────────────────────────────────────
-blk   = Block().bordered().title(" Panel ")
-inner = blk.inner(area)           # Rect minus borders
-frame.render_widget(blk, area)
-frame.render_widget(content, inner)
-
-# ── Table ──────────────────────────────────────────────────────────────────
-Table([Row([Cell("A"), Cell("B")])]).column_widths([
-    Constraint.fill(1), Constraint.length(8),
-]).header(Row([Cell("Name"), Cell("Value")]))
-
-# ── Calendar ───────────────────────────────────────────────────────────────
-Monthly(CalendarDate.today(), CalendarEventStore.today_highlighted(
-    Style().fg(Color.green()).bold()
-)).show_month_header(Style().bold())
-
-# ── QR Code ────────────────────────────────────────────────────────────────
-frame.render_qrcode(QrCodeWidget("https://example.com"), area)
-
-# ── ScrollView ─────────────────────────────────────────────────────────────
-frame.render_stateful_scrollview(ScrollView.from_lines(lines, 80), area, state)
-
-# ── TextArea ───────────────────────────────────────────────────────────────
-frame.render_textarea(ta, area)
+class Rect:
+    x: int;  y: int;  width: int;  height: int
+    right: int;  bottom: int;  left: int;  top: int
+    def area(self) -> int
+    def inner(self, horizontal: int = 1, vertical: int = 1) -> Rect
+    def contains(self, other: Rect) -> bool
+    def intersection(self, other: Rect) -> Rect | None
+    def union(self, other: Rect) -> Rect
 ```
 
-</details>
+### Style
+
+```python
+class Style:
+    def fg(self, color: Color) -> Style
+    def bg(self, color: Color) -> Style
+    def bold(self) -> Style
+    def italic(self) -> Style
+    def underlined(self) -> Style
+    def dim(self) -> Style
+    def reversed(self) -> Style
+    def hidden(self) -> Style
+    def crossed_out(self) -> Style
+    def slow_blink(self) -> Style
+    def rapid_blink(self) -> Style
+    def patch(self, other: Style) -> Style
+    def add_modifier(self, modifier: Modifier) -> Style
+    def remove_modifier(self, modifier: Modifier) -> Style
+```
+
+### Block
+
+```python
+class Block:
+    def title(self, title: str) -> Block
+    def title_bottom(self, title: str) -> Block
+    def bordered(self) -> Block                          # all four borders
+    def borders(self, top, right, bottom, left) -> Block
+    def border_type(self, bt: BorderType) -> Block       # Plain | Rounded | Double | Thick
+    def style(self, style: Style) -> Block
+    def border_style(self, style: Style) -> Block
+    def title_style(self, style: Style) -> Block
+    def padding(self, left, right, top, bottom) -> Block
+    def title_alignment(self, alignment: str) -> Block
+```
+
+### Prompts
+
+```python
+# Blocking single-line text prompt (runs its own event loop)
+value: str | None = prompt_text("Enter your name: ")
+password: str | None = prompt_password("Password: ")
+
+# Stateful inline prompts
+state = TextState()
+frame.render_text_prompt(TextPrompt("Search: "), area, state)
+if state.is_complete():
+    print(state.value())
+```
+
+### Exceptions
+
+| Exception | When raised |
+|---|---|
+| `PyratatuiError` | Base exception for all library errors |
+| `BackendError` | Terminal backend failure |
+| `LayoutError` | Invalid layout constraint or split |
+| `RenderError` | Widget render failure |
+| `AsyncError` | Async / thread misuse |
+| `StyleError` | Invalid style combination |
 
 ---
 
-## 📚 Examples
+## Examples
 
-30+ (total 33) numbered, runnable examples covering every feature:
+The `examples/` directory contains 33 standalone, runnable scripts. Run any of them directly:
+
+```bash
+python examples/01_hello_world.py
+python examples/07_async_reactive.py
+python examples/08_effects_fade.py
+```
 
 | # | File | Demonstrates |
-|:---:|:---|:---|
+|---|---|---|
 | 01 | `01_hello_world.py` | `Terminal`, `Paragraph`, `Block`, `Style`, `Color` |
-| 02 | `02_layout.py` | `Layout`, `Constraint`, `Direction` |
+| 02 | `02_layout.py` | `Layout`, `Constraint`, `Direction`, nested splits |
 | 03 | `03_styled_text.py` | `Span`, `Line`, `Text`, `Modifier` |
 | 04 | `04_list_navigation.py` | `List`, `ListState`, keyboard navigation |
-| 05 | `05_progress_bar.py` | `Gauge`, `LineGauge`, live updates |
-| 06 | `06_table_dynamic.py` | `Table`, `TableState`, dynamic rows |
-| 07 | `07_async_reactive.py` | `AsyncTerminal`, asyncio, reactive data |
-| 08 | `08_effects_fade.py` | `EffectManager`, fade-in/out |
-| 09 | `09_effects_dsl.py` | `compile_effect` DSL |
-| 10 | `10_full_app.py` | Multi-tab app with all widgets |
-| 11 | `11_popup_basic.py` | `Popup` (stateless centered) |
-| 12 | `12_popup_stateful.py` | `PopupState` (draggable) |
-| 13 | `13_popup_scrollable.py` | Scrollable popup content |
-| 14 | `14_textarea_basic.py` | `TextArea` basics (Emacs bindings) |
-| 15 | `15_textarea_advanced.py` | `TextArea` Vim modal mode |
+| 05 | `05_progress_bar.py` | `Gauge`, `LineGauge`, time-based animation |
+| 06 | `06_table_dynamic.py` | `Table`, `Row`, `Cell`, `TableState` |
+| 07 | `07_async_reactive.py` | `AsyncTerminal`, live background metrics |
+| 08 | `08_effects_fade.py` | `Effect.fade_from_fg`, `EffectManager` |
+| 09 | `09_effects_dsl.py` | `compile_effect()`, DSL syntax |
+| 10 | `10_full_app.py` | Full production app: tabs, async, effects |
+| 11 | `11_popup_basic.py` | `Popup` — basic centered popup |
+| 12 | `12_popup_stateful.py` | `PopupState` — draggable popup |
+| 13 | `13_popup_scrollable.py` | `KnownSizeWrapper` — scrollable popup content |
+| 14 | `14_textarea_basic.py` | `TextArea` — basic multi-line editor |
+| 15 | `15_textarea_advanced.py` | `TextArea` — modal vim-style editing |
 | 16 | `16_scrollview.py` | `ScrollView`, `ScrollViewState` |
 | 17 | `17_qrcode.py` | `QrCodeWidget`, `QrColors` |
-| 18 | `18_async_progress.py` | `AsyncTerminal` + async progress |
-| 19 | `19_effects_glitch.py` | Glitch effects |
-| 20 | `20_effects_matrix.py` | Matrix rain effect |
-| 21 | `21_prompt_confirm.py` | `PasswordPrompt` |
-| 22 | `22_prompt_select.py` | Select prompt |
-| 23 | `23_prompt_text.py` | `TextPrompt` |
-| 24 | `24_dashboard.py` | Full monitoring dashboard |
-| **25** | **`25_calendar.py`** | **`Monthly`, `CalendarEventStore`, navigation** |
-| 26-30 | `26_bar_graph.py` … `30_image_view.py` | BarGraph, Tree, Logger, Image widgets |
-and so on...
+| 18 | `18_async_progress.py` | Async live progress with `asyncio.Task` |
+| 19 | `19_effects_glitch.py` | `dissolve` / `coalesce` glitch animation |
+| 20 | `20_effects_matrix.py` | `sweep_in` / `sweep_out` matrix-style |
+| 21 | `21_prompt_confirm.py` | Yes/No confirmation prompt |
+| 22 | `22_prompt_select.py` | Arrow-key selection menu |
+| 23 | `23_prompt_text.py` | `TextPrompt`, `TextState` |
+| 24 | `24_dashboard.py` | Full dashboard: `Tabs`, `BarChart`, `Sparkline` |
+| 25 | `25_calendar.py` | `Monthly`, `CalendarDate`, `CalendarEventStore` |
+| 26 | `26_bar_graph.py` | `BarGraph`, gradient styles |
+| 27 | `27_tree_widget.py` | `Tree`, `TreeState`, collapsible nodes |
+| 28 | `28_markdown_renderer.py` | `markdown_to_text()` |
+| 29 | `29_logger_demo.py` | `TuiLoggerWidget`, `init_logger` |
+| 30 | `30_image_view.py` | `ImagePicker`, `ImageWidget`, `ImageState` |
+| 31 | `31_canvas_drawing.py` | `Canvas` — lines, points, rectangles |
+| 32 | `32_map_widget.py` | `Map`, `MapResolution` |
+| 33 | `33_button_widget.py` | `Button` — focus state, key handling |
 
 ---
 
-## 🏗️ Project Structure
+## Building from Source
 
-```
-pyratatui
-├── Cargo.toml
-├── CHANGELOG.md
-├── docs
-│   ├── build
-│   │   ├── build_scripts.md
-│   │   └── packaging.md
-│   ├── examples
-│   │   ├── advanced_examples.md
-│   │   └── minimal_examples.md
-│   ├── faq.md
-│   ├── index.md
-│   ├── installation.md
-│   ├── reference
-│   │   ├── api_surface.md
-│   │   ├── bar_graph.md
-│   │   ├── buffer.md
-│   │   ├── calendar.md
-│   │   ├── effects.md
-│   │   ├── image_widget.md
-│   │   ├── layout.md
-│   │   ├── logger.md
-│   │   ├── markdown.md
-│   │   ├── popups.md
-│   │   ├── prompts.md
-│   │   ├── qrcode.md
-│   │   ├── scrollview.md
-│   │   ├── style.md
-│   │   ├── terminal.md
-│   │   ├── text.md
-│   │   ├── textarea.md
-│   │   ├── tree_widget.md
-│   │   └── widgets.md
-│   └── tutorial
-│       ├── async_updates.md
-│       ├── effect_workflow.md
-│       ├── progress_bar.md
-│       ├── quickstart.md
-│       ├── table_updates.md
-│       └── tachyonfx_effects.md
-├── examples
-│   ├── 01_hello_world.py
-│   ├── 02_layout.py
-│   ├── 03_styled_text.py
-│   ├── 04_list_navigation.py
-│   ├── 05_progress_bar.py
-│   ├── 06_table_dynamic.py
-│   ├── 07_async_reactive.py
-│   ├── 08_effects_fade.py
-│   ├── 09_effects_dsl.py
-│   ├── 10_full_app.py
-│   ├── 11_popup_basic.py
-│   ├── 12_popup_stateful.py
-│   ├── 13_popup_scrollable.py
-│   ├── 14_textarea_basic.py
-│   ├── 15_textarea_advanced.py
-│   ├── 16_scrollview.py
-│   ├── 17_qrcode.py
-│   ├── 18_async_progress.py
-│   ├── 19_effects_glitch.py
-│   ├── 20_effects_matrix.py
-│   ├── 21_prompt_confirm.py
-│   ├── 22_prompt_select.py
-│   ├── 23_prompt_text.py
-│   ├── 24_dashboard.py
-│   ├── 25_calendar.py
-│   ├── 26_bar_graph.py
-│   ├── 27_tree_widget.py
-│   ├── 28_markdown_renderer.py
-│   ├── 29_logger_demo.py
-│   ├── 30_image_view.py
-│   ├── 31_canvas_drawing.py
-│   ├── 32_map_widget.py
-│   └── 33_button_widget.py
-├── gallery
-│   ├── alacritty.png
-│   ├── pyratatui.png
-│   ├── snip_1.png
-│   ├── snip_2.png
-│   ├── snip_3.png
-│   ├── snip_4.png
-│   ├── snip_5.png
-│   ├── snip_6.png
-│   ├── snip_7.png
-│   ├── snip_8.png
-│   ├── snip_9.png
-│   ├── snip_10.png
-│   ├── snip_11.png
-│   ├── snip_12.png
-│   ├── snip_13.png
-│   ├── snip_14.png
-│   └── snip_15.png
-├── LICENSE
-├── MIGRATION.md
-├── mkdocs.yml
-├── pyproject.toml
-├── python
-│   └── pyratatui
-│       ├── async_terminal.py
-│       ├── cli.py
-│       ├── helpers.py
-│       └── py.typed
-├── README.md
-├── scripts
-│   ├── build.ps1
-│   ├── build.sh
-│   ├── format.ps1
-│   └── format.sh
-├── src
-│   ├── backend
-│   │   └── mod.rs
-│   ├── bar_graph
-│   │   └── mod.rs
-│   ├── buffer
-│   │   └── mod.rs
-│   ├── button_widget
-│   │   ├── button.rs
-│   │   └── mod.rs
-│   ├── canvas_widget
-│   │   ├── canvas.rs
-│   │   └── mod.rs
-│   ├── effects
-│   │   └── mod.rs
-│   ├── errors
-│   │   └── mod.rs
-│   ├── image_widget
-│   │   └── mod.rs
-│   ├── layout
-│   │   └── mod.rs
-│   ├── lib.rs
-│   ├── logger
-│   │   └── mod.rs
-│   ├── map_widget
-│   │   ├── map.rs
-│   │   └── mod.rs
-│   ├── markdown
-│   │   └── mod.rs
-│   ├── popups
-│   │   └── mod.rs
-│   ├── prompts
-│   │   └── mod.rs
-│   ├── qrcode
-│   │   └── mod.rs
-│   ├── scrollview
-│   │   └── mod.rs
-│   ├── style
-│   │   └── mod.rs
-│   ├── terminal
-│   │   └── mod.rs
-│   ├── text
-│   │   └── mod.rs
-│   ├── textarea
-│   │   └── mod.rs
-│   ├── tree_widget
-│   │   └── mod.rs
-│   └── widgets
-│       ├── barchart.rs
-│       ├── block.rs
-│       ├── calendar.rs
-│       ├── canvas_widget.rs
-│       ├── clear.rs
-│       ├── gauge.rs
-│       ├── list.rs
-│       ├── mod.rs
-│       ├── paragraph.rs
-│       ├── scrollbar.rs
-│       ├── sparkline.rs
-│       ├── table.rs
-│       └── tabs.rs
-├── test_all_examples.py
-└── tests
-    ├── python
-    │   └── test_pyratatui.py
-    └── rust
-        └── lib_tests.rs
+### Prerequisites
+
+```bash
+# 1. Install Rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source "$HOME/.cargo/env"
+rustup update stable
+
+# 2. Install Maturin
+pip install maturin
 ```
 
----
-
-## 🤝 Contributing
+### Development Build
 
 ```bash
 git clone https://github.com/pyratatui/pyratatui.git
 cd pyratatui
-python -m venv .venv && source .venv/bin/activate
-pip install maturin pytest pytest-asyncio ruff mypy
+
+# Editable install — fast compile, slower runtime
 maturin develop
+
+# Release build — full Rust optimizations (recommended for benchmarking/use)
+maturin develop --release
+```
+
+After changing Rust source files, re-run `maturin develop` to rebuild the extension. Python files in `python/pyratatui/` are reflected immediately with no rebuild.
+
+### Build a Distributable Wheel
+
+```bash
+maturin build --release
+# Wheel output: target/wheels/pyratatui-*.whl
+pip install target/wheels/pyratatui-*.whl
+```
+
+### Format & Lint
+
+```bash
+# Linux / macOS
+./scripts/format.sh
+
+# Windows
+./scripts/format.ps1
+
+# Python only (ruff + mypy)
+ruff check .
+ruff format .
+mypy python/
+```
+
+### Tests
+
+```bash
+# Python tests (pytest)
 pytest tests/python/
+
+# Rust unit tests
 cargo test
 ```
 
-**Lint & format:**
+### Docker (source build)
 
-```bash
-ruff check . && ruff format .
-cargo fmt && cargo clippy -- -D warnings
+```dockerfile
+FROM python:3.12-slim
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+ENV PATH="/root/.cargo/bin:${PATH}"
+RUN pip install pyratatui
 ```
-
-All PRs welcome — bug fixes, new widget bindings, documentation, and examples.
 
 ---
 
-## 📄 License
+## Platform Notes
 
-MIT — see [LICENSE](LICENSE)
+### Windows
+
+Requires **Windows Terminal** or **VS Code integrated terminal** (Windows 10 build 1903+ for VT sequence support). The classic `cmd.exe` may not render all Unicode characters correctly.
+
+### macOS
+
+Default Terminal.app works but has limited colour support. [iTerm2](https://iterm2.com) or [Alacritty](https://alacritty.org) are recommended for true-colour and full Unicode rendering.
+
+### Linux
+
+Any modern terminal emulator works. Verify true-colour support:
+
+```bash
+echo $COLORTERM   # should output "truecolor" or "24bit"
+```
+
+### Troubleshooting
+
+**`ModuleNotFoundError: No module named 'pyratatui._pyratatui'`**
+The native extension was not compiled. Run `maturin develop --release` or reinstall via `pip install --force-reinstall pyratatui`.
+
+**`PanicException: pyratatui::terminal::Terminal is unsendable`**
+You called a `Terminal` method from a thread-pool thread. Use `AsyncTerminal` instead.
+
+**Garbage on screen after Ctrl-C**
+Always use `Terminal` as a context manager. For emergency recovery: `reset` or `stty sane` in your shell.
+
+**`ValueError: Invalid date`**
+`CalendarDate.from_ymd(y, m, d)` raises `ValueError` for invalid dates (e.g. Feb 30). Validate inputs first.
+
+---
+
+## Contributing
+
+Contributions are welcome! Here's how to get started:
+
+1. **Fork** the repository on GitHub
+2. **Clone** your fork and create a branch: `git checkout -b feature/my-feature`
+3. **Install dev dependencies:**
+   ```bash
+   pip install -e ".[dev]"
+   maturin develop
+   ```
+4. **Make your changes** — Rust source lives in `src/`, Python in `python/pyratatui/`
+5. **Run tests and linters:**
+   ```bash
+   pytest tests/python/
+   cargo test
+   ruff check . && ruff format .
+   mypy python/
+   ```
+6. **Open a Pull Request** against `main`
+
+Please follow the existing code style. For significant changes, open an issue first to discuss your approach.
+
+### Documentation
+
+Docs are built with MkDocs Material:
+
+```bash
+pip install -e ".[docs]"
+mkdocs serve          # local preview at http://localhost:8000
+mkdocs build          # static site in site/
+```
+
+---
+
+## License
+
+MIT © 2025 PyRatatui contributors — see [LICENSE](LICENSE) for full text.
+
+---
 
 <div align="center">
 
-<br/>
+Built with 🦀 [ratatui](https://ratatui.rs) · ⚡ [tachyonfx](https://github.com/junkdog/tachyonfx) · 🐍 [PyO3](https://pyo3.rs)
 
-Built with [ratatui](https://ratatui.rs) 🐀 and [PyO3](https://pyo3.rs) 🦀
-
-<br/>
-
-*If pyratatui saves you time, consider giving the repo a ⭐*
+[GitHub](https://github.com/pyratatui/pyratatui) · [PyPI](https://pypi.org/project/pyratatui/) · [Docs](https://pyratatui.github.io/pyratatui) · [Issues](https://github.com/pyratatui/pyratatui/issues)
 
 </div>

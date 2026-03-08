@@ -1,6 +1,6 @@
-from pathlib import Path
 import subprocess
 import sys
+from pathlib import Path
 
 examples_dir = Path("examples")
 
@@ -10,4 +10,3 @@ for file in sorted(examples_dir.glob("*.py")):
     if result.returncode != 0:
         print(f"\nStopped: {file.name} exited with code {result.returncode}")
         sys.exit(result.returncode)
-        
