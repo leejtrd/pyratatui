@@ -56,12 +56,6 @@ No runtime dependencies beyond the pre-built native extension wheel.
 - `pyratatui init <project_name>` CLI scaffolding command
 - New examples: `31_canvas_drawing.py`, `32_map_widget.py`, `33_button_widget.py`
 
-### Screenshots
-
-| Canvas | Map | Button |
-|:---:|:---:|:---:|
-| ![](../gallery/snip_10.png) | ![](../gallery/snip_11.png) | ![](../gallery/snip_12.png) |
-
 ## Quick Start
 
 ```python
