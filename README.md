@@ -987,7 +987,7 @@ mkdocs build          # static site in site/
 
 ## License
 
-MIT © 2025 PyRatatui contributors — see [LICENSE](LICENSE) for full text.
+MIT © 2026 PyRatatui contributors — see [LICENSE](LICENSE) for full text.
 
 ---
 
