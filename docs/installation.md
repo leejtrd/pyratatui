@@ -19,6 +19,7 @@ pip install pyratatui
 Pre-built wheels are available on PyPI for:
 
 - Linux x86\_64 (manylinux2014)
+- Linux x86\_64 and aarch64 (musllinux\_1\_2)
 - macOS x86\_64 (starting from v0.2.2) and arm64 (universal2)
 - Windows x86\_64
 
