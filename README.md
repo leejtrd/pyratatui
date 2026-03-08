@@ -9,7 +9,7 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-green?logo=opensourceinitiative&logoColor=white)](LICENSE)
 [![Ratatui](https://img.shields.io/badge/ratatui-0.30-blueviolet?logo=rust&logoColor=white)](https://github.com/ratatui/ratatui)
 [![PyO3](https://img.shields.io/badge/PyO3-0.28-blue?logo=rust)](https://pyo3.rs)
-[![Platforms](https://img.shields.io/badge/platform-Linux%20%7C%20macOS%20%7C%20Windows-lightgrey)](https://github.com/pyratatui/pyratatui)
+[![Platforms](https://img.shields.io/badge/platform-Linux%20%7C%20macOS%20%7C%20Windows-aqua)](https://github.com/pyratatui/pyratatui)
 [![asyncio](https://img.shields.io/badge/asyncio-ready-teal?logo=python&logoColor=white)](https://docs.python.org/3/library/asyncio.html)
 
 *Build rich, high-performance terminal UIs in Python — with the full power of Rust under the hood.*
@@ -24,29 +24,29 @@
 
 <table>
   <tr>
-    <td align="center" width="33%"><img src="gallery/snip_1.png" alt="Widget showcase" width="100%"/></td>
-    <td align="center" width="33%"><img src="gallery/snip_2.png" alt="Layout panels" width="100%"/></td>
-    <td align="center" width="33%"><img src="gallery/snip_3.png" alt="Styled text" width="100%"/></td>
+    <td align="center" width="33%"><img src="https://raw.githubusercontent.com/pyratatui/pyratatui/main/gallery/snip_1.png" alt="Widget showcase" width="100%"/></td>
+    <td align="center" width="33%"><img src="https://raw.githubusercontent.com/pyratatui/pyratatui/main/gallery/snip_2.png" alt="Layout panels" width="100%"/></td>
+    <td align="center" width="33%"><img src="https://raw.githubusercontent.com/pyratatui/pyratatui/main/gallery/snip_3.png" alt="Styled text" width="100%"/></td>
   </tr>
   <tr>
-    <td align="center" width="33%"><img src="gallery/snip_4.png" alt="List navigation" width="100%"/></td>
-    <td align="center" width="33%"><img src="gallery/snip_5.png" alt="Progress bars" width="100%"/></td>
-    <td align="center" width="33%"><img src="gallery/snip_6.png" alt="Dynamic table" width="100%"/></td>
+    <td align="center" width="33%"><img src="https://raw.githubusercontent.com/pyratatui/pyratatui/main/gallery/snip_4.png" alt="List navigation" width="100%"/></td>
+    <td align="center" width="33%"><img src="https://raw.githubusercontent.com/pyratatui/pyratatui/main/gallery/snip_5.png" alt="Progress bars" width="100%"/></td>
+    <td align="center" width="33%"><img src="https://raw.githubusercontent.com/pyratatui/pyratatui/main/gallery/snip_6.png" alt="Dynamic table" width="100%"/></td>
   </tr>
   <tr>
-    <td align="center" width="33%"><img src="gallery/snip_7.png" alt="Async reactive UI" width="100%"/></td>
-    <td align="center" width="33%"><img src="gallery/snip_8.png" alt="TachyonFX effects" width="100%"/></td>
-    <td align="center" width="33%"><img src="gallery/snip_9.png" alt="Effect DSL" width="100%"/></td>
+    <td align="center" width="33%"><img src="https://raw.githubusercontent.com/pyratatui/pyratatui/main/gallery/snip_7.png" alt="Async reactive UI" width="100%"/></td>
+    <td align="center" width="33%"><img src="https://raw.githubusercontent.com/pyratatui/pyratatui/main/gallery/snip_8.png" alt="TachyonFX effects" width="100%"/></td>
+    <td align="center" width="33%"><img src="https://raw.githubusercontent.com/pyratatui/pyratatui/main/gallery/snip_9.png" alt="Effect DSL" width="100%"/></td>
   </tr>
   <tr>
-    <td align="center" width="33%"><img src="gallery/snip_10.png" alt="Full app dashboard" width="100%"/></td>
-    <td align="center" width="33%"><img src="gallery/snip_11.png" alt="Popup widget" width="100%"/></td>
-    <td align="center" width="33%"><img src="gallery/snip_12.png" alt="Draggable popup" width="100%"/></td>
+    <td align="center" width="33%"><img src="https://raw.githubusercontent.com/pyratatui/pyratatui/main/gallery/snip_10.png" alt="Full app dashboard" width="100%"/></td>
+    <td align="center" width="33%"><img src="https://raw.githubusercontent.com/pyratatui/pyratatui/main/gallery/snip_11.png" alt="Popup widget" width="100%"/></td>
+    <td align="center" width="33%"><img src="https://raw.githubusercontent.com/pyratatui/pyratatui/main/gallery/snip_12.png" alt="Draggable popup" width="100%"/></td>
   </tr>
   <tr>
-    <td align="center" width="33%"><img src="gallery/snip_13.png" alt="Scrollable popup" width="100%"/></td>
-    <td align="center" width="33%"><img src="gallery/snip_14.png" alt="TextArea editor" width="100%"/></td>
-    <td align="center" width="33%"><img src="gallery/snip_15.png" alt="ScrollView" width="100%"/></td>
+    <td align="center" width="33%"><img src="https://raw.githubusercontent.com/pyratatui/pyratatui/main/gallery/snip_13.png" alt="Scrollable popup" width="100%"/></td>
+    <td align="center" width="33%"><img src="https://raw.githubusercontent.com/pyratatui/pyratatui/main/gallery/snip_14.png" alt="TextArea editor" width="100%"/></td>
+    <td align="center" width="33%"><img src="https://raw.githubusercontent.com/pyratatui/pyratatui/main/gallery/snip_15.png" alt="ScrollView" width="100%"/></td>
   </tr>
 </table>
 
