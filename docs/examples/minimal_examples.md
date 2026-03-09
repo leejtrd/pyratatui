@@ -299,38 +299,31 @@ python examples/25_calendar.py
 
 ---
 
-## 26. Web Counter *(new in 0.2.1)*
+## 26. Bar Graph *(new in 0.2.1)*
 
 ```python
-# examples/26_web_counter.py (simplified)
-from pyratatui.web import WebTerminal
-from pyratatui import Paragraph, Block
+# examples/26_bar_graph.py (simplified)
+from pyratatui import BarColorMode, BarGraph, BarGraphStyle, Terminal
 
-counter = 0
+graph = (
+    BarGraph([0.12, 0.44, 0.83, 0.57, 0.91])
+    .bar_style(BarGraphStyle.Braille)
+    .color_mode(BarColorMode.VerticalGradient)
+    .gradient("turbo")
+)
 
-def ui(frame):
-    frame.render_widget(
-        Paragraph.from_string(f"Counter: {counter}")
-            .block(Block().bordered().title(" Web TUI ")),
-        frame.area,
-    )
-
-with WebTerminal(cols=100, rows=30) as term:
-    print(f"Open: {term.url}")
+with Terminal() as term:
     while True:
-        term.draw(ui)
-        ev = term.poll_event(timeout_ms=50)
-        if ev:
-            if ev.code == "Up":   counter += 1
-            if ev.code == "Down": counter -= 1
-            if ev.code == "q":    break
+        term.draw(lambda frame, _graph=graph: frame.render_widget(_graph, frame.area))
+        ev = term.poll_event(timeout_ms=200)
+        if ev and ev.code == "q":
+            break
 ```
 
 Run the full version:
 
 ```bash
-python examples/26_web_counter.py
-# → Open: http://localhost:7700/
+python examples/26_bar_graph.py
 ```
 
 ---
@@ -363,5 +356,17 @@ python examples/26_web_counter.py
 | 22 | `22_prompt_select.py` | Select prompt |
 | 23 | `23_prompt_text.py` | TextPrompt |
 | 24 | `24_dashboard.py` | Full monitoring dashboard |
-| **25** | **`25_calendar.py`** | **Monthly calendar widget** |
-| **26** | **`26_web_counter.py`** | **pyratatui.web browser TUI** |
+| 25 | `25_calendar.py` | Monthly calendar widget |
+| 26 | `26_bar_graph.py` | BarGraph, gradient styles |
+| 27 | `27_tree_widget.py` | Tree, TreeState |
+| 28 | `28_markdown_renderer.py` | markdown_to_text() |
+| 29 | `29_logger_demo.py` | TuiLoggerWidget, init_logger |
+| 30 | `30_image_view.py` | ImagePicker, ImageWidget |
+| 31 | `31_canvas_drawing.py` | Canvas drawing primitives |
+| 32 | `32_map_widget.py` | Map, MapResolution |
+| 33 | `33_button_widget.py` | Button focus + key handling |
+| 34 | `34_throbber.py` | Throbber spinner controls |
+| 35 | `35_menu_widget.py` | Menu / MenuState interactions |
+| 36 | `36_piechart.py` | PieChart with PieStyle |
+| 37 | `37_checkbox_widget.py` | Checkbox toggle |
+| 38 | `38_chart_widget.py` | Chart with line/scatter/bar datasets |

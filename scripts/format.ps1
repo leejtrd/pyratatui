@@ -31,6 +31,13 @@ if (Get-Command cargo -ErrorAction SilentlyContinue) {
     Write-Warning "Cargo not found. Skipping Rust checks."
 }
 
+if ((Get-Command cargo -ErrorAction SilentlyContinue) -and (Get-Command maturin -ErrorAction SilentlyContinue)) {
+    Write-Host "Syncing pyratatui build for pytest..."
+    & "$PSScriptRoot\build.ps1" --dev
+} else {
+    Write-Warning "Cargo or maturin not found. pytest may use a stale installed pyratatui build."
+}
+
 Write-Host "Running pytest..."
 pytest -q
 

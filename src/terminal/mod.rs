@@ -22,12 +22,16 @@ use ratatui::{backend::CrosstermBackend, Frame as RFrame, Terminal as RTerminal}
 use crate::bar_graph::BarGraph as PyBarGraph;
 use crate::button_widget::Button as PyButton;
 use crate::canvas_widget::Canvas as PyCanvas;
+use crate::chart_widget::Chart as PyChart;
+use crate::checkbox_widget::Checkbox as PyCheckbox;
 use crate::effects::{Effect as PyEffect, EffectManager as PyEffectManager};
 use crate::errors::{io_err_to_py, render_err_to_py};
 use crate::image_widget::{ImageState as PyImageState, ImageWidget as PyImageWidget};
 use crate::layout::Rect;
 use crate::logger::{TuiLoggerWidget as PyTuiLoggerWidget, TuiWidgetState as PyTuiWidgetState};
 use crate::map_widget::Map as PyMap;
+use crate::menu_widget::{Menu as PyMenu, MenuState as PyMenuState};
+use crate::piechart_widget::PieChart as PyPieChart;
 use crate::popups::{
     render_popup_text, render_stateful_popup_text, Popup as PyPopup, PopupState as PyPopupState,
 };
@@ -35,6 +39,7 @@ use crate::prompts::{PasswordPrompt, TextPrompt, TextState};
 use crate::qrcode::QrCodeWidget as PyQrCodeWidget;
 use crate::scrollview::{ScrollView as PyScrollView, ScrollViewState as PyScrollViewState};
 use crate::textarea::TextArea as PyTextArea;
+use crate::throbber_widget::Throbber as PyThrobber;
 use crate::tree_widget::{Tree as PyTree, TreeState as PyTreeState};
 use crate::widgets::{
     BarChart, Block, Clear, Gauge, LineGauge, List, ListState, Monthly, Paragraph, Scrollbar,
@@ -187,6 +192,22 @@ impl Frame {
             frame.render_widget(&*w, a);
             return Ok(());
         }
+        if let Ok(w) = widget.extract::<PyRef<PyThrobber>>() {
+            frame.render_widget(&*w, a);
+            return Ok(());
+        }
+        if let Ok(w) = widget.extract::<PyRef<PyPieChart>>() {
+            frame.render_widget(w.to_ratatui()?, a);
+            return Ok(());
+        }
+        if let Ok(w) = widget.extract::<PyRef<PyCheckbox>>() {
+            frame.render_widget(w.to_ratatui()?, a);
+            return Ok(());
+        }
+        if let Ok(w) = widget.extract::<PyRef<PyChart>>() {
+            frame.render_widget(w.to_ratatui()?, a);
+            return Ok(());
+        }
 
         Err(render_err_to_py(format!(
             "Unknown widget type: {}",
@@ -228,6 +249,18 @@ impl Frame {
         widget: &Scrollbar,
         area: &Rect,
         state: &mut ScrollbarState,
+    ) -> PyResult<()> {
+        self.get()
+            .render_stateful_widget(widget.to_ratatui(), area.inner, &mut state.inner);
+        Ok(())
+    }
+
+    /// Render a `Menu` with mutable `MenuState`.
+    pub fn render_stateful_menu(
+        &mut self,
+        widget: &PyMenu,
+        area: &Rect,
+        mut state: PyRefMut<'_, PyMenuState>,
     ) -> PyResult<()> {
         self.get()
             .render_stateful_widget(widget.to_ratatui(), area.inner, &mut state.inner);

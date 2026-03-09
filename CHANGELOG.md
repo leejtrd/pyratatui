@@ -7,6 +7,68 @@ and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
 
+## [0.2.x]
+
+Removed the experimental web-based runtime.
+PyRatatui is now a pure terminal UI framework.
+
+---
+
+## [0.2.4] — 2026-03-09
+
+### Summary
+
+`0.2.4` adds five new widget integrations and expands the Python API surface:
+`Throbber`, `Menu`, `PieChart`, `Checkbox`, and built-in `Chart`.
+
+### Added
+
+- **Throbber widget** via `throbber-widgets-tui`:
+  - `Throbber.start()`, `Throbber.stop()`, `Throbber.set_speed()`, `Throbber.set_style()`
+  - Render support through `frame.render_widget(throbber, area)`
+- **Menu widget** via `tui-menu`:
+  - `Menu`, `MenuItem`, `MenuState`, `MenuEvent`
+  - Nested menu trees with keyboard handling and event draining
+  - New frame method: `frame.render_stateful_menu(menu, area, state)`
+- **PieChart widget** via `tui-piechart`:
+  - `PieChart`, `PieData`, `PieStyle`
+  - Legend layout/alignment/position and resolution controls
+- **Checkbox widget** via `tui-checkbox`:
+  - `Checkbox` with checked/unchecked states and toggle helpers
+  - Style controls for symbol/label and layout alignment
+- **Built-in Chart widget binding**:
+  - `Chart`, `Axis`, `Dataset`, `GraphType`, `Marker`, `LegendPosition`
+  - Multi-dataset support for scatter/line/bar in one chart
+
+### Changed
+
+- Crate and Python package versions: `0.2.3` → `0.2.4`
+- Added new dependencies:
+  - `throbber-widgets-tui = 0.11.0`
+  - `tui-menu = 0.3.1`
+  - `tui-piechart = 0.3.1`
+  - `tui-checkbox = 0.4.3`
+- Python exports and stubs updated for all new widgets and frame methods.
+- Added numbered examples:
+  - `34_throbber.py`
+  - `35_menu_widget.py`
+  - `36_piechart.py`
+  - `37_checkbox_widget.py`
+  - `38_chart_widget.py`
+- Added Python integration tests for:
+  - throbber controls
+  - menu interactions
+  - pie chart setup
+  - checkbox toggling
+  - multi-dataset chart construction
+
+- Format scripts also now install the wheel.
+
+### Fixed
+
+- Previous missing imports/API exposure for new widget modules in Python package exports.
+- Version expectations in tests and packaging metadata.
+
 ## [0.2.3] — 2026-03-08
 
 Minor documentation updates. Added musllinux support. No significant changes from the previous release.
@@ -122,8 +184,8 @@ New examples for all widgets:
 Five new third-party widget crates have been integrated:
 **tui-bar-graph** (gradient bar graphs), **tui-tree-widget** (interactive tree views),
 **tui-markdown** (Markdown → Text conversion), **tui-logger** (real-time log viewer),
-and **ratatui-image** (terminal image display). The web/WASM/Ratzilla code has been
-**fully removed** — pyratatui is now a pure terminal TUI library. All 30 examples
+and **ratatui-image** (terminal image display). PyRatatui is now a pure terminal
+TUI library. All 30 examples
 are numbered sequentially.
 
 ---
@@ -292,21 +354,20 @@ Builder methods: `.block()`, `.default_style()`, `.show_surrounding()`,
   `CalendarEventStore`, `Monthly` added to `pub use` re-exports
 - `src/terminal/mod.rs` — `Monthly` imported; `try_widget!(Monthly, to_ratatui)`
   inserted in `render_widget()` dispatch
-- `mkdocs.yml` — Calendar and Web TUI entries added under *API Reference*;
+- `mkdocs.yml` — Calendar entry added under *API Reference*;
   `site_description` updated to reference ratatui 0.30
-- `README.md` — fully rewritten: ratatui 0.30, all widgets, calendar, web
-  module, updated examples table (01–26), corrected code snippets
+- `README.md` — fully rewritten: ratatui 0.30, all widgets, calendar,
+  updated examples table (01–26), corrected code snippets
 - `docs/index.md` — version badges corrected (0.29 → 0.30 / 0.2.0 → 0.2.1);
   feature table updated; architecture diagram updated
 - `docs/installation.md` — verify snippet updated to expect `"0.2.1"` / `"0.30"`
-- `docs/reference/api_surface.md` — Calendar and web module rows added to
+- `docs/reference/api_surface.md` — Calendar rows added to
   Core Types, Widgets, and Terminal & Frame tables
-- `docs/examples/minimal_examples.md` — Calendar and Web counter added as
-  examples 25 and 26; stale `Layout.default()` calls fixed to `Layout()`
+- `docs/examples/minimal_examples.md` — Calendar examples added;
+  stale `Layout.default()` calls fixed to `Layout()`
 - `docs/examples/advanced_examples.md` — Calendar advanced section added;
   outdated `Table(rows, widths)` constructor corrected
-- `docs/faq.md` — web module Q&A section added; ratatui 0.29 references
-  updated to 0.30
+- `docs/faq.md` — ratatui 0.29 references updated to 0.30
 
 ---
 

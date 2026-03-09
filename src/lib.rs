@@ -8,6 +8,8 @@ mod bar_graph;
 mod buffer;
 mod button_widget;
 mod canvas_widget;
+mod chart_widget;
+mod checkbox_widget;
 mod effects;
 mod errors;
 mod image_widget;
@@ -15,6 +17,8 @@ mod layout;
 mod logger;
 mod map_widget;
 mod markdown;
+mod menu_widget;
+mod piechart_widget;
 mod popups;
 mod prompts;
 mod qrcode;
@@ -23,6 +27,7 @@ mod style;
 mod terminal;
 mod text;
 mod textarea;
+mod throbber_widget;
 mod tree_widget;
 mod widgets;
 
@@ -55,6 +60,13 @@ fn _pyratatui(py: Python<'_>, m: &Bound<'_, PyModule>) -> PyResult<()> {
     canvas_widget::register_canvas_widget(py, m)?;
     map_widget::register_map_widget(py, m)?;
     button_widget::register_button_widget(py, m)?;
+
+    // ── New v0.2.4 widgets ──────────────────────────────────────────────────────
+    throbber_widget::register_throbber_widget(py, m)?;
+    menu_widget::register_menu_widget(py, m)?;
+    piechart_widget::register_piechart_widget(py, m)?;
+    checkbox_widget::register_checkbox_widget(py, m)?;
+    chart_widget::register_chart_widget(py, m)?;
 
     m.add("__version__", env!("CARGO_PKG_VERSION"))?;
     m.add("__ratatui_version__", "0.30")?;

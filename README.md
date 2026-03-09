@@ -48,6 +48,11 @@
     <td align="center" width="33%"><img src="https://raw.githubusercontent.com/pyratatui/pyratatui/main/gallery/snip_14.png" alt="TextArea editor" width="100%"/></td>
     <td align="center" width="33%"><img src="https://raw.githubusercontent.com/pyratatui/pyratatui/main/gallery/snip_15.png" alt="ScrollView" width="100%"/></td>
   </tr>
+  <tr>
+    <td align="center" width="33%"><img src="https://raw.githubusercontent.com/pyratatui/pyratatui/main/gallery/snip_16.png" alt="Scrollable popup" width="100%"/></td>
+    <td align="center" width="33%"><img src="https://raw.githubusercontent.com/pyratatui/pyratatui/main/gallery/snip_17.png" alt="TextArea editor" width="100%"/></td>
+    <td align="center" width="33%"><img src="https://raw.githubusercontent.com/pyratatui/pyratatui/main/gallery/snip_18.png" alt="ScrollView" width="100%"/></td>
+  </tr>
 </table>
 
 ---
@@ -57,7 +62,7 @@
 PyRatatui exposes the entire [ratatui](https://ratatui.rs) Rust TUI library to Python via a thin, zero-overhead [PyO3](https://pyo3.rs) extension module. You get:
 
 - **Pixel-perfect terminal rendering** from ratatui's battle-tested Rust layout engine
-- **30+ widgets** out of the box: gauges, tables, trees, calendars, QR codes, images, markdown, and more
+- **35+ widgets** out of the box: gauges, tables, trees, menus, charts, calendars, QR codes, images, markdown, and more
 - **TachyonFX animations** — fade, sweep, glitch, dissolve, and composable effect pipelines
 - **Async-native** — `AsyncTerminal` + `asyncio` integration for live, reactive UIs
 - **Full type stubs** — every class and method ships with `.pyi` annotations for IDE autocomplete
@@ -93,7 +98,7 @@ pip install pyratatui
 Pre-built wheels are published to PyPI for:
 
 - Linux x86\_64 (manylinux2014)
-- Linux x86\_64 and aarch64 (musllinux\_1\_2)
+- Linux x86\_64 and aarch64 (musllinux\_1\_2) (starting from 0.2.3)
 - macOS x86\_64 (starting from v0.2.2) and arm64 (universal2)
 - Windows x86\_64
 
@@ -121,7 +126,7 @@ pip install pyratatui
 
 ```python
 import pyratatui
-print(pyratatui.__version__)          # "0.2.3"
+print(pyratatui.__version__)          # "0.2.4"
 print(pyratatui.__ratatui_version__)  # "0.30"
 ```
 
@@ -367,6 +372,11 @@ Tabs(["Overview", "Logs", "Config"]).select(1).highlight_style(Style().fg(Color.
 | `Canvas` | `ratatui` | Low-level line/point/rect drawing |
 | `Map` | `ratatui` | World map widget |
 | `Button` | built-in | Focus-aware interactive button |
+| `Throbber` | `throbber-widgets-tui` | Animated spinner/progress indicator |
+| `Menu` / `MenuState` | `tui-menu` | Nested dropdown menus with event handling |
+| `PieChart` / `PieData` / `PieStyle` | `tui-piechart` | Pie chart widget with legend and percentages |
+| `Checkbox` | `tui-checkbox` | Configurable checkbox widget |
+| `Chart` / `Dataset` / `Axis` | `ratatui` | Multi-dataset cartesian chart (line/scatter/bar) |
 
 **Third-party widget examples:**
 
@@ -636,7 +646,7 @@ python main.py
 
 ```bash
 pyratatui version
-# PyRatatui 0.2.3
+# PyRatatui 0.2.4
 ```
 
 ---
@@ -687,6 +697,7 @@ class Frame:
     def render_stateful_list(self, widget: List, area: Rect, state: ListState) -> None
     def render_stateful_table(self, widget: Table, area: Rect, state: TableState) -> None
     def render_stateful_scrollbar(self, widget: Scrollbar, area: Rect, state: ScrollbarState) -> None
+    def render_stateful_menu(self, widget: Menu, area: Rect, state: MenuState) -> None
 
     # Popups
     def render_popup(self, popup: Popup, area: Rect) -> None
@@ -796,7 +807,7 @@ if state.is_complete():
 
 ## Examples
 
-The `examples/` directory contains 33 standalone, runnable scripts. Run any of them directly:
+The `examples/` directory contains 38 standalone, runnable scripts. Run any of them directly:
 
 ```bash
 python examples/01_hello_world.py
@@ -839,6 +850,11 @@ python examples/08_effects_fade.py
 | 31 | `31_canvas_drawing.py` | `Canvas` — lines, points, rectangles |
 | 32 | `32_map_widget.py` | `Map`, `MapResolution` |
 | 33 | `33_button_widget.py` | `Button` — focus state, key handling |
+| 34 | `34_throbber.py` | `Throbber` — start/stop and speed control |
+| 35 | `35_menu_widget.py` | `Menu`, `MenuState`, `MenuEvent` |
+| 36 | `36_piechart.py` | `PieChart`, `PieData`, `PieStyle` |
+| 37 | `37_checkbox_widget.py` | `Checkbox` — checked/unchecked toggle |
+| 38 | `38_chart_widget.py` | `Chart`, `Dataset`, `Axis`, `GraphType` |
 
 ---
 

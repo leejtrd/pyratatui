@@ -55,6 +55,19 @@ type stub, documentation page, and example file.
 | `Monthly` *(calendar)* | `Monthly` | ✅ | `calendar.md` | `25_calendar.py` |
 | `CalendarDate` *(time::Date)* | `CalendarDate` | ✅ | `calendar.md` | `25_calendar.py` |
 | `CalendarEventStore` | `CalendarEventStore` | ✅ | `calendar.md` | `25_calendar.py` |
+| `throbber_widgets_tui::Throbber` | `Throbber` | ✅ | `throbber_widget.md` | `34_throbber.py` |
+| `tui_menu::Menu` | `Menu` | ✅ | `menu_widget.md` | `35_menu_widget.py` |
+| `tui_menu::MenuItem` | `MenuItem` | ✅ | `menu_widget.md` | `35_menu_widget.py` |
+| `tui_menu::MenuState` | `MenuState` | ✅ | `menu_widget.md` | `35_menu_widget.py` |
+| `tui_menu::MenuEvent` | `MenuEvent` | ✅ | `menu_widget.md` | `35_menu_widget.py` |
+| `tui_piechart::PieChart` | `PieChart` | ✅ | `piechart_widget.md` | `36_piechart.py` |
+| `tui_piechart::PieSlice` | `PieData` | ✅ | `piechart_widget.md` | `36_piechart.py` |
+| `tui_checkbox::Checkbox` | `Checkbox` | ✅ | `checkbox_widget.md` | `37_checkbox_widget.py` |
+| `ratatui::widgets::Chart` | `Chart` | ✅ | `chart_widget.md` | `38_chart_widget.py` |
+| `ratatui::widgets::Dataset` | `Dataset` | ✅ | `chart_widget.md` | `38_chart_widget.py` |
+| `ratatui::widgets::Axis` | `Axis` | ✅ | `chart_widget.md` | `38_chart_widget.py` |
+| `ratatui::widgets::GraphType` | `GraphType` | ✅ | `chart_widget.md` | `38_chart_widget.py` |
+| `ratatui::symbols::Marker` | `Marker` | ✅ | `chart_widget.md` | `38_chart_widget.py` |
 
 ---
 
@@ -81,6 +94,7 @@ type stub, documentation page, and example file.
 | `render_textarea(ta, area)` | `TextArea` | *(internal)* |
 | `render_stateful_scrollview(sv, area, state)` | `ScrollView` | `ScrollViewState` |
 | `render_qrcode(qr, area)` | `QrCodeWidget` | — |
+| `render_stateful_menu(menu, area, state)` | `Menu` | `MenuState` |
 | `apply_effect(effect, ms, area)` | `Effect` | — |
 | `apply_effect_manager(mgr, ms, area)` | `EffectManager` | — |
 | `render_text_prompt(prompt, area, state)` | `TextPrompt` | `TextState` |
@@ -162,15 +176,6 @@ type stub, documentation page, and example file.
 | `CalendarEventStore` | `CalendarEventStore` | ✅ | `calendar.md` | `25_calendar.py` |
 | `Monthly` | `Monthly` | ✅ | `calendar.md` | `25_calendar.py` |
 
----
-
-## Web TUI *(new in 0.2.1)*
-
-| Python API | Module | Doc | Example |
-|---|---|---|---|
-| `WebTerminal` | `pyratatui.web` | `web.md` | `26_web_counter.py` |
-| `WebKeyEvent` | `pyratatui.web` | `web.md` | `26_web_counter.py` |
-| `serve()` | `pyratatui.web` | `web.md` | `26_web_counter.py` |
 
 ---
 

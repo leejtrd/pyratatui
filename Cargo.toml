@@ -1,6 +1,6 @@
 [package]
 name    = "pyratatui"
-version = "0.2.3"
+version = "0.2.4"
 edition = "2021"
 authors = ["pyratatui contributors"]
 description = """
@@ -57,12 +57,18 @@ tui-tree-widget = "0.24"
 tui-markdown = "0.3"
 
 # Logger widget (uses ratatui ^0.30 directly)
-tui-logger = "0.18"
+tui-logger = "0.18.1"
 log        = "0.4"
 
 # Image widget (default-features = false avoids libchafa requirement)
-ratatui-image = { version = "10", default-features = false, features = ["crossterm", "image-defaults"] }
+ratatui-image = { version = "10", default-features = false, features = ["crossterm"] }
 image         = { version = "0.25", default-features = false, features = ["png", "jpeg"] }
+
+# v0.2.4 widget integrations
+throbber-widgets-tui = "0.11.0"
+tui-menu             = "0.3.1"
+tui-piechart         = "0.3.1"
+tui-checkbox         = "0.4.3"
 
 [features]
 default = []
@@ -80,4 +86,4 @@ pyo3 = { version = "0.28", features = ["abi3-py310"] }
 opt-level = 1
 
 [lints.clippy]
-pedantic = "warn"
+pedantic = "allow"

@@ -1,5 +1,5 @@
 site_name: pyratatui
-site_description: Python bindings for ratatui 0.30 — BarGraph, Tree, Markdown, Logger, Image widgets, tachyonfx effects, typed API
+site_description: Python bindings for ratatui 0.30 — Chart, PieChart, Menu, Throbber, Checkbox, BarGraph, Tree, Markdown, Logger, Image widgets, tachyonfx effects, typed API
 site_url: https://pyratatui.github.io/pyratatui
 repo_url: https://github.com/pyratatui/pyratatui
 repo_name: pyratatui/pyratatui
@@ -97,6 +97,11 @@ nav:
       - Markdown: reference/markdown.md
       - Logger: reference/logger.md
       - ImageWidget: reference/image_widget.md
+      - Throbber: reference/throbber_widget.md
+      - Menu: reference/menu_widget.md
+      - PieChart: reference/piechart_widget.md
+      - Checkbox: reference/checkbox_widget.md
+      - Chart: reference/chart_widget.md
       - Buffer: reference/buffer.md
   - Examples:
       - Minimal Examples: examples/minimal_examples.md

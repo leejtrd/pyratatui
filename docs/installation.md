@@ -19,7 +19,7 @@ pip install pyratatui
 Pre-built wheels are available on PyPI for:
 
 - Linux x86\_64 (manylinux2014)
-- Linux x86\_64 and aarch64 (musllinux\_1\_2)
+- Linux x86\_64 and aarch64 (musllinux\_1\_2) (starting from 0.2.3)
 - macOS x86\_64 (starting from v0.2.2) and arm64 (universal2)
 - Windows x86\_64
 
@@ -70,7 +70,7 @@ maturin develop --release   # installs into the current virtualenv
 
 ```python
 import pyratatui
-print(pyratatui.__version__)           # "0.2.1"
+print(pyratatui.__version__)           # "0.2.4"
 print(pyratatui.__ratatui_version__)   # "0.30"
 ```
 
@@ -98,30 +98,7 @@ maturin develop          # debug build (fast compile, slower runtime)
 ```
 
 After changing Rust source, re-run `maturin develop`. Python files under
-`python/pyratatui/` (including `pyratatui.web`) are picked up immediately.
-
----
-
-## Web TUI — No Extra Dependencies
-
-`pyratatui.web` is pure Python and uses only the standard library:
-
-```python
-from pyratatui.web import WebTerminal, serve
-```
-
-No `pip install` needed beyond `pyratatui` itself.
-
-### Optional: ratzilla WASM app
-
-The companion `pyratatui.ratxilla (pure-Python, no WASM needed)` provides full browser-native rendering via ratzilla.
-Build it with:
-
-```bash
-cargo install --locked trunk
-rustup target add wasm32-unknown-unknown
-./scripts/build_web.sh --release
-```
+`python/pyratatui/` are picked up immediately.
 
 ---
 

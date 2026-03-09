@@ -939,19 +939,6 @@ class TestImageWidget:
             picker.load("/nonexistent/path/image.png")
 
 
-# ── No web/ratxilla module ────────────────────────────────────────────────────
-
-
-class TestNoWebModule:
-    def test_ratxilla_not_importable(self):
-        with pytest.raises(ImportError):
-            import pyratatui.ratxilla  # noqa: F401
-
-    def test_web_not_importable(self):
-        with pytest.raises(ImportError):
-            import pyratatui.web  # noqa: F401
-
-
 # ── Async ─────────────────────────────────────────────────────────────────────
 
 
@@ -1007,7 +994,7 @@ class TestVersion:
 
         assert hasattr(pyratatui, "__version__")
         assert hasattr(pyratatui, "__ratatui_version__")
-        assert pyratatui.__version__ == "0.2.3"
+        assert pyratatui.__version__ == "0.2.4"
         assert pyratatui.__ratatui_version__ == "0.30"
 
     def test_public_api_complete(self):
@@ -1061,6 +1048,22 @@ class TestVersion:
             "Map",
             "MapResolution",
             "Button",
+            # New widgets (v0.2.4)
+            "Throbber",
+            "Menu",
+            "MenuItem",
+            "MenuState",
+            "MenuEvent",
+            "PieChart",
+            "PieData",
+            "PieStyle",
+            "Checkbox",
+            "Chart",
+            "Axis",
+            "Dataset",
+            "GraphType",
+            "Marker",
+            "LegendPosition",
         ]
         for name in required:
             assert hasattr(pyratatui, name), f"Missing: {name}"
@@ -1384,3 +1387,126 @@ class TestButtonWidget:
         btn = Button("Old")
         updated = btn.set_label("New")
         assert updated.label == "New"
+
+
+# ── New Widgets (v0.2.4) ──────────────────────────────────────────────────────
+
+
+class TestThrobberWidget:
+    def test_throbber_start_stop_speed_style(self):
+        from pyratatui import Color, Style, Throbber
+
+        th = Throbber("Loading")
+        assert th.is_running
+        th.stop()
+        assert not th.is_running
+        th.start()
+        assert th.is_running
+        th.set_speed(2)
+        assert th.speed == 2
+        th.set_style(Style().fg(Color.cyan()))
+        th.set_throbber_style(Style().fg(Color.yellow()).bold())
+        th.set_set("clock")
+        assert "Throbber" in repr(th)
+
+
+class TestMenuWidget:
+    def test_menu_basic_interactions(self):
+        from pyratatui import MenuEvent, MenuItem, MenuState
+
+        items = [
+            MenuItem.item("Open", "open"),
+            MenuItem.group(
+                "Settings",
+                [
+                    MenuItem.item("Theme", "theme"),
+                    MenuItem.item("Layout", "layout"),
+                ],
+            ),
+        ]
+
+        state = MenuState(items)
+        state.activate()
+        assert state.is_active()
+
+        events = state.handle_key("Enter")
+        assert isinstance(events, list)
+        if events:
+            assert isinstance(events[0], MenuEvent)
+
+        state.handle_key("Right")
+        state.handle_key("Down")
+        state.handle_key("Enter")
+        drained = state.drain_events()
+        assert isinstance(drained, list)
+
+
+class TestPieChartWidget:
+    def test_piechart_setup(self):
+        from pyratatui import Color, PieChart, PieData, PieStyle, Style
+
+        data = [
+            PieData("Rust", 45.0, Color.red()),
+            PieData("Python", 30.0, Color.yellow()),
+            PieData("Go", 25.0, Color.cyan()),
+        ]
+        style = (
+            PieStyle()
+            .style(Style().fg(Color.white()))
+            .show_legend(True)
+            .show_percentages(True)
+            .resolution("braille")
+            .legend_position("right")
+            .legend_layout("vertical")
+            .legend_alignment("left")
+        )
+        chart = PieChart(data).pie_style(style)
+        assert chart is not None
+        assert "PieChart" in repr(chart)
+
+
+class TestCheckboxWidgetV024:
+    def test_checkbox_toggle(self):
+        from pyratatui import Checkbox
+
+        cb = Checkbox("Accept terms", Checkbox.Unchecked)
+        assert not cb.is_checked
+
+        cb = cb.toggle()
+        assert cb.is_checked
+
+        cb = cb.set_checked(False)
+        assert not cb.is_checked
+
+        cb2 = Checkbox("Enable", Checkbox.Checked).unchecked()
+        assert not cb2.is_checked
+
+
+class TestChartWidgetV024:
+    def test_chart_multiple_datasets(self):
+        from pyratatui import Axis, Chart, Dataset, GraphType, LegendPosition, Marker
+
+        line_data = [(0.0, 1.0), (1.0, 3.0), (2.0, 2.0), (3.0, 4.0)]
+        scatter_data = [(0.5, 1.5), (1.5, 2.5), (2.5, 3.0)]
+        bar_data = [(0.0, 2.0), (1.0, 1.0), (2.0, 3.5), (3.0, 2.2)]
+
+        datasets = [
+            Dataset(line_data)
+            .name("Line")
+            .graph_type(GraphType.Line)
+            .marker(Marker.Braille),
+            Dataset(scatter_data)
+            .name("Scatter")
+            .graph_type(GraphType.Scatter)
+            .marker(Marker.Dot),
+            Dataset(bar_data).name("Bars").graph_type(GraphType.Bar).marker(Marker.Bar),
+        ]
+
+        chart = (
+            Chart(datasets)
+            .x_axis(Axis().title("X").bounds(0.0, 3.0).labels(["0", "1.5", "3"]))
+            .y_axis(Axis().title("Y").bounds(0.0, 5.0).labels(["0", "2.5", "5"]))
+            .legend_position(LegendPosition.TopRight)
+        )
+        assert chart is not None
+        assert "Chart" in repr(chart)

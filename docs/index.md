@@ -10,8 +10,8 @@
 ---
 
 pyratatui wraps the full ratatui 0.30 widget library — including the built-in
-Calendar widget — plus the tachyonfx animation engine and a browser-based web
-TUI module behind a clean, typed, idiomatic Python API compiled with
+Calendar widget — plus the tachyonfx animation engine behind a clean, typed,
+idiomatic Python API compiled with
 [PyO3](https://pyo3.rs) and [Maturin](https://github.com/PyO3/maturin).
 No runtime dependencies beyond the pre-built native extension wheel.
 
@@ -33,7 +33,7 @@ No runtime dependencies beyond the pre-built native extension wheel.
 
 | Feature | Details |
 |---|---|
-| **Widgets** | Block, Paragraph, List, Table, Gauge, LineGauge, BarChart, Sparkline, Tabs, Scrollbar, Clear, **Monthly** |
+| **Widgets** | Block, Paragraph, List, Table, Gauge, LineGauge, BarChart, Sparkline, Tabs, Scrollbar, Clear, Monthly, Throbber, Menu, PieChart, Checkbox, Chart |
 | **Layout** | Constraint-based splits (length, percentage, fill, min, max, ratio), flex modes |
 | **Styling** | 16 named + 256-indexed + RGB true-colour, 9 text modifiers, immutable builder |
 | **Text** | `Span` → `Line` → `Text` hierarchy with per-span styling |
@@ -45,16 +45,16 @@ No runtime dependencies beyond the pre-built native extension wheel.
 | **ScrollView** | `ScrollView`, `ScrollViewState` — scrollable viewport |
 | **QR codes** | `QrCodeWidget` — terminal QR codes via Unicode half-blocks |
 | **Calendar** | `Monthly`, `CalendarDate`, `CalendarEventStore` — monthly calendar |
-| **Web TUI** | `pyratatui.web.WebTerminal` — render any app in the browser |
 | **Type stubs** | Complete `.pyi` for IDE completion and mypy |
 
-## What's New in 0.2.2
+## What's New in 0.2.4
 
-- `Canvas` widget for custom drawing (`draw_line`, `draw_point`, `draw_rect`, `clear`)
-- `Map` widget with `MapResolution.Low` and `MapResolution.High`
-- `Button` widget with focus state and keyboard interaction (`handle_key`)
-- `pyratatui init <project_name>` CLI scaffolding command
-- New examples: `31_canvas_drawing.py`, `32_map_widget.py`, `33_button_widget.py`
+- `Throbber` widget (`start`, `stop`, `set_speed`, `set_style`)
+- `Menu`, `MenuItem`, `MenuState`, `MenuEvent`
+- `PieChart`, `PieData`, `PieStyle`
+- `Checkbox` with checked/unchecked states and toggle APIs
+- Built-in `Chart` bindings with `Axis`, `Dataset`, `GraphType`, and `Marker`
+- New examples: `34_throbber.py` through `38_chart_widget.py`
 
 ## Quick Start
 
@@ -92,21 +92,6 @@ with Terminal() as term:
     term.poll_event(timeout_ms=10_000)
 ```
 
-## Web TUI Quick Start
-
-```python
-from pyratatui.web import serve
-from pyratatui import Paragraph, Block
-
-def ui(frame):
-    frame.render_widget(
-        Paragraph.from_string("Hello, browser!").block(Block().bordered()),
-        frame.area,
-    )
-
-serve(ui)   # opens browser at http://localhost:7700/, blocks until 'q'
-```
-
 ## Async Quick Start
 
 ```python
@@ -137,7 +122,6 @@ asyncio.run(main())
 - **[TachyonFX Effects](tutorial/tachyonfx_effects.md)** — animations and transitions
 - **[API Reference](reference/terminal.md)** — complete class/method documentation
 - **[Calendar Reference](reference/calendar.md)** — Calendar widget
-- **[Web TUI Reference](reference/web.md)** — browser-based TUI
 - **[Minimal Examples](examples/minimal_examples.md)** — copy-paste demos
 - **[Advanced Examples](examples/advanced_examples.md)** — full mini-apps
 - **[Build & Package](build/build_scripts.md)** — compile and distribute wheels
@@ -152,10 +136,7 @@ Python application
 pyratatui (Python layer)
   ├── AsyncTerminal          # asyncio wrapper
   ├── run_app / run_app_async # convenience helpers
-  └── web/                   # pyratatui.web — browser TUI
-      │
-      ▼ (re-exports from _pyratatui)
-_pyratatui (PyO3 native extension)
+  └── _pyratatui            # PyO3 native extension
   ├── Terminal / Frame       # screen driver + render callback
   ├── Layout / Rect / Constraint
   ├── Widgets

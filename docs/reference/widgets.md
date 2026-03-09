@@ -751,3 +751,15 @@ with Terminal() as term:
         if event and button.handle_key(event.code, event.ctrl, event.alt, event.shift):
             button = button.set_label("Submitted!")
 ```
+
+---
+
+## Additional Widgets (v0.2.4)
+
+The following widgets are documented on dedicated reference pages:
+
+- [Throbber](throbber_widget.md)
+- [Menu](menu_widget.md)
+- [PieChart](piechart_widget.md)
+- [Checkbox](checkbox_widget.md)
+- [Chart](chart_widget.md)

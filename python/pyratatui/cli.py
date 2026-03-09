@@ -71,13 +71,28 @@ Edit `main.py` to customize your TUI application. See [PyRatatui documentation](
 ### Quick Start
 
 ```python
-from pyratatui import Terminal, Paragraph
+from pyratatui import Block, Color, Paragraph, Style, Terminal
 
-with Terminal() as term:
-    term.draw(lambda frame: frame.render_widget(
-        Paragraph.from_string("Your content here"),
-        frame.area,
-    ))
+def main():
+    with Terminal() as term:
+        while True:
+
+            def ui(frame):
+                frame.render_widget(
+                    Paragraph.from_string("Hello, pyratatui! 🐀  Press q to quit.")
+                    .block(Block().bordered().title("Hello World"))
+                    .style(Style().fg(Color.cyan())),
+                    frame.area,
+                )
+
+            term.draw(ui)
+            ev = term.poll_event(timeout_ms=100)
+            if ev and ev.code == "q":
+                break
+
+
+if __name__ == "__main__":
+    main()
 ```
 
 ## Features

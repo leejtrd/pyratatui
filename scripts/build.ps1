@@ -25,11 +25,43 @@ if (-not (Get-Command cargo -ErrorAction SilentlyContinue)) {
 Write-Host "[OK] $(maturin --version)"
 Write-Host "[OK] $(cargo --version)"
 
+function Test-EditableEnv {
+    if ($env:VIRTUAL_ENV -or $env:CONDA_PREFIX) {
+        return $true
+    }
+
+    return Test-Path (Join-Path $ProjectDir ".venv")
+}
+
+function Install-ReleaseWheel {
+    Write-Host "`n[BUILD] Building release wheel..."
+    maturin build --release --strip --out dist\
+
+    $wheel = Get-ChildItem dist\*.whl |
+             Sort-Object LastWriteTime -Descending |
+             Select-Object -First 1
+
+    if (-not $wheel) {
+        Write-Error "No wheel produced in dist\"
+        exit 1
+    }
+
+    Write-Host "[INSTALL] Installing $($wheel.Name)..."
+    python -m pip install --upgrade $wheel.FullName --force-reinstall
+
+    Write-Host "[OK] Installed successfully."
+}
+
 switch ($Mode) {
     "--dev" {
-        Write-Host "`n[DEV] Development mode (editable install)..."
-        maturin develop --release
-        Write-Host "[OK] Installed (editable)."
+        if (Test-EditableEnv) {
+            Write-Host "`n[DEV] Development mode (editable install)..."
+            maturin develop --release
+            Write-Host "[OK] Installed (editable)."
+        } else {
+            Write-Warning "No virtualenv or conda environment detected. Falling back to wheel build + install."
+            Install-ReleaseWheel
+        }
     }
     "--sdist" {
         Write-Host "`n[SDIST] Building source distribution..."
@@ -37,21 +69,6 @@ switch ($Mode) {
         Write-Host "[OK] sdist created in dist\"
     }
     default {
-        Write-Host "`n[BUILD] Building release wheel..."
-        maturin build --release --strip --out dist\
-
-        $wheel = Get-ChildItem dist\*.whl |
-                 Sort-Object LastWriteTime -Descending |
-                 Select-Object -First 1
-
-        if (-not $wheel) {
-            Write-Error "No wheel produced in dist\"
-            exit 1
-        }
-
-        Write-Host "[INSTALL] Installing $($wheel.Name)..."
-        pip install --upgrade $wheel.FullName --force-reinstall
-
-        Write-Host "[OK] Installed successfully."
+        Install-ReleaseWheel
     }
 }

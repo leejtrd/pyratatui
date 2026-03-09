@@ -186,7 +186,7 @@ frame.render_widget(widget, area)
 
 Render a stateless widget into `area`.
 
-**Supported widget types:** `Block`, `Paragraph`, `Gauge`, `LineGauge`, `BarChart`, `Sparkline`, `Clear`, `Tabs`, `List` (stateless), `Table` (stateless).
+**Supported widget types:** `Block`, `Paragraph`, `Gauge`, `LineGauge`, `BarChart`, `Sparkline`, `Clear`, `Tabs`, `Monthly`, `BarGraph`, `Canvas`, `Map`, `Button`, `Throbber`, `PieChart`, `Checkbox`, `Chart`, `List` (stateless), `Table` (stateless).
 
 | Parameter | Type | Description |
 |---|---|---|
@@ -230,6 +230,14 @@ frame.render_stateful_scrollbar(scrollbar, area, scrollbar_state)
 ```
 
 Render a `Scrollbar` with its scroll position state.
+
+### `render_stateful_menu(widget, area, state)`
+
+```python
+frame.render_stateful_menu(menu, area, menu_state)
+```
+
+Render a `Menu` with mutable `MenuState`.
 
 ### `apply_effect(effect, elapsed_ms, area)`
 

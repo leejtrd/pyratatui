@@ -25,11 +25,37 @@ echo "[OK] $(cargo --version)"
 
 MODE="${1:-}"
 
+has_editable_env() {
+    [[ -n "${VIRTUAL_ENV:-}" || -n "${CONDA_PREFIX:-}" || -d "$PROJECT_DIR/.venv" ]]
+}
+
+install_release_wheel() {
+    echo "[BUILD] Building release wheel..."
+    maturin build --release --strip --out dist/
+
+    WHEEL="$(ls -t dist/*.whl 2>/dev/null | head -n 1 || true)"
+
+    if [[ -z "$WHEEL" ]]; then
+        echo "[ERROR] No wheel produced in dist/"
+        exit 1
+    fi
+
+    echo "[INSTALL] Installing $(basename "$WHEEL")..."
+    python -m pip install --upgrade "$WHEEL" --force-reinstall
+
+    echo "[OK] Installed successfully."
+}
+
 case "$MODE" in
     --dev)
-        echo "[DEV] Development mode (editable install)..."
-        maturin develop --release
-        echo "[OK] Installed (editable)."
+        if has_editable_env; then
+            echo "[DEV] Development mode (editable install)..."
+            maturin develop --release
+            echo "[OK] Installed (editable)."
+        else
+            echo "[WARN] No virtualenv or conda environment detected. Falling back to wheel build + install."
+            install_release_wheel
+        fi
         ;;
     --sdist)
         echo "[SDIST] Building source distribution..."
@@ -37,19 +63,6 @@ case "$MODE" in
         echo "[OK] sdist created in dist/"
         ;;
     *)
-        echo "[BUILD] Building release wheel..."
-        maturin build --release --strip --out dist/
-
-        WHEEL="$(ls -t dist/*.whl 2>/dev/null | head -n 1 || true)"
-
-        if [[ -z "$WHEEL" ]]; then
-            echo "[ERROR] No wheel produced in dist/"
-            exit 1
-        fi
-
-        echo "[INSTALL] Installing $(basename "$WHEEL")..."
-        pip install --upgrade "$WHEEL" --force-reinstall
-
-        echo "[OK] Installed successfully."
+        install_release_wheel
         ;;
 esac

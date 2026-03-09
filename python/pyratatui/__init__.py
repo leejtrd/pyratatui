@@ -14,7 +14,12 @@ from ._pyratatui import (
     __version__,
 )
 from .async_terminal import AsyncTerminal
+from .chart import Axis, Chart, Dataset, GraphType, LegendPosition, Marker
+from .checkbox import Checkbox
 from .helpers import run_app, run_app_async
+from .menu import Menu, MenuEvent, MenuItem, MenuState
+from .piechart import PieChart, PieData, PieStyle
+from .throbber import Throbber
 
 __all__ = [
     "__version__",
@@ -51,6 +56,21 @@ __all__ = [
     "Map",
     "MapResolution",
     "Button",
+    "Throbber",
+    "Menu",
+    "MenuItem",
+    "MenuState",
+    "MenuEvent",
+    "PieChart",
+    "PieData",
+    "PieStyle",
+    "Checkbox",
+    "Chart",
+    "Axis",
+    "Dataset",
+    "GraphType",
+    "Marker",
+    "LegendPosition",
     "TreeItem",
     "Tree",
     "TreeState",
