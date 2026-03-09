@@ -7,6 +7,14 @@ and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
 
+## [Unreleased]
+
+### Changed
+
+- The async/event helpers no longer treat ``'q'`` (or ``Ctrl+C``) as a built-in exit key: ``AsyncTerminal.events()`` now defaults to ``stop_on_quit=False``, and ``run_app``/``run_app_async`` only exit when ``on_key`` returns ``True`` so developers explicitly handle quitting.
+
+---
+
 ## [0.2.x]
 
 Removed the experimental web-based runtime.

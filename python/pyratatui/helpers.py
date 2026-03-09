@@ -41,7 +41,8 @@ def run_app(
         ui_fn:  A callable that receives ``Frame`` and renders the UI each tick.
         fps:    Target frames per second.
         on_key: Optional callback receiving a ``KeyEvent``. Return ``True`` to
-                quit. If not supplied, pressing ``q`` or Ctrl-C exits.
+                quit. ``run_app`` no longer handles ``q`` or Ctrl-C for you;
+                implement the desired quit logic in ``on_key``.
 
     Example::
 
@@ -53,21 +54,15 @@ def run_app(
                 frame.area,
             )
 
-        run_app(ui)
+        run_app(ui, on_key=lambda ev: ev.code == "q")
     """
     timeout_ms = max(1, int(1000 / fps))
     with Terminal() as term:
         while True:
             term.draw(ui_fn)
             ev = term.poll_event(timeout_ms=timeout_ms)
-            if ev is not None:
-                if on_key is not None:
-                    if on_key(ev):
-                        break
-                else:
-                    # Default: quit on 'q' or Ctrl-C.
-                    if ev.code == "q" or (ev.code == "c" and ev.ctrl):
-                        break
+            if ev is not None and on_key is not None and on_key(ev):
+                break
 
 
 async def run_app_async(
@@ -83,7 +78,8 @@ async def run_app_async(
         ui_fn:  A callable that receives ``Frame`` and renders the UI each tick.
         fps:    Target frames per second.
         on_key: Optional callback receiving a ``KeyEvent``. Return ``True`` to
-                quit. If not supplied, pressing ``q`` or Ctrl-C exits.
+                quit. Provide ``on_key`` to explicitly handle quitting; ``run_app_async``
+                no longer exits automatically when ``q`` or Ctrl-C are pressed.
 
     Example::
 
@@ -105,10 +101,5 @@ async def run_app_async(
     async with AsyncTerminal() as term:
         async for ev in term.events(fps=fps, stop_on_quit=False):
             term.draw(ui_fn)
-            if ev is not None:
-                if on_key is not None:
-                    if on_key(ev):
-                        break
-                else:
-                    if ev.code == "q" or (ev.code == "c" and ev.ctrl):
-                        break
+            if ev is not None and on_key is not None and on_key(ev):
+                break

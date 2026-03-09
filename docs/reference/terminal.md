@@ -130,7 +130,9 @@ async with AsyncTerminal() as term:
 
 Equivalent to entering and exiting `Terminal` synchronously on the main async thread.
 
-### `events(fps=30.0, *, stop_on_quit=True)`
+### `events(fps=30.0, *, stop_on_quit=False)`
+
+By default `events()` keeps yielding each frame until your code breaks the loop; pass `stop_on_quit=True` to opt into auto-stopping when `q` or `Ctrl+C` are pressed.
 
 ```python
 async for ev in term.events(fps=30):
@@ -148,7 +150,7 @@ Async generator that drives the render loop:
 | Parameter | Type | Default | Description |
 |---|---|---|---|
 | `fps` | `float` | `30.0` | Target frames per second |
-| `stop_on_quit` | `bool` | `True` | Auto-stop on `q` or `Ctrl+C` |
+| `stop_on_quit` | `bool` | `False` | Auto-stop on `q` or `Ctrl+C` when enabled |
 
 ### `draw(draw_fn)` / `poll_event()` / `area()` / `clear()` / `hide_cursor()` / `show_cursor()`
 
@@ -371,7 +373,7 @@ def my_ui(frame):
 run_app(my_ui, fps=30)
 ```
 
-Synchronous convenience wrapper: creates a `Terminal`, runs the draw loop at `fps`, quits on `q` or `Ctrl+C`.
+Synchronous convenience wrapper: creates a `Terminal`, runs the draw loop at `fps`, and depends on your `on_key` callback returning `True` to exit; the helper no longer interprets `q` or `Ctrl+C` for you.
 
 ### `run_app_async(draw_fn, fps=30)`
 
@@ -385,4 +387,4 @@ async def my_ui(frame):
 asyncio.run(run_app_async(my_ui, fps=30))
 ```
 
-Async version using `AsyncTerminal`.
+Async version using `AsyncTerminal`. Provide an `on_key` callback to dictate when the helper should stop.

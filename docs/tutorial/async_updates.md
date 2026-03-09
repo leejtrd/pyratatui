@@ -47,7 +47,7 @@ async def main():
                     frame.area,
                 )
             term.draw(ui)
-            # events() auto-stops on 'q' (stop_on_quit=True by default)
+            # events() now keeps running by default; pass stop_on_quit=True to exit on 'q'
 
 asyncio.run(main())
 ```
@@ -233,7 +233,9 @@ asyncio.run(main())
 
 ## `events()` Generator
 
-`AsyncTerminal.events()` is an async generator that drives the render loop:
+`AsyncTerminal.events()` is an async generator that drives the render loop.
+
+By default it keeps yielding each tick; pass `stop_on_quit=True` to auto-stop when `q` or `Ctrl+C` are pressed:
 
 ```python
 async for ev in term.events(fps=30, stop_on_quit=True):
@@ -251,7 +253,7 @@ Each iteration:
 | Parameter | Type | Default | Description |
 |---|---|---|---|
 | `fps` | `float` | `30.0` | Target frames per second |
-| `stop_on_quit` | `bool` | `True` | Auto-stop on `q` or `Ctrl+C` |
+| `stop_on_quit` | `bool` | `False` | Auto-stop on `q` or `Ctrl+C` when enabled |
 
 ---
 

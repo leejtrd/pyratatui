@@ -57,7 +57,9 @@ async def main():
 
     async with AsyncTerminal() as term:
         term.hide_cursor()
-        async for _ev in term.events(fps=20):
+        async for ev in term.events(fps=20):
+            if ev is not None and (ev.code == "q" or (ev.code == "c" and ev.ctrl)):
+                break
             cpu = state["cpu"]
             mem = state["mem"]
             reqs = state["requests"]

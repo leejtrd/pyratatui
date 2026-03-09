@@ -726,24 +726,30 @@ asyncio.run(main())
 
 ### `AsyncTerminal.events()` Parameters
 
+By default `events()` keeps yielding each tick; pass `stop_on_quit=True` to opt into automatic exit on `q`/Ctrl+C.
+
 ```python
 async for ev in term.events(fps=30.0, stop_on_quit=True):
     # ev is KeyEvent | None
     # None emitted each tick (use for animations / periodic updates)
-    # stop_on_quit=True exits the loop automatically on "q"
+    # stop_on_quit=True (opt-in) exits the loop automatically on "q" or Ctrl+C
 ```
 
 ### `run_app` / `run_app_async` Helpers
 
-For simpler apps that don't need manual task management:
+For simpler apps that don't need manual task management; keep in mind that quitting must be implemented via `on_key` or another explicit signal.
 
 ```python
 from pyratatui import run_app, run_app_async, Paragraph
 
 # Synchronous
-run_app(lambda frame: frame.render_widget(
-    Paragraph.from_string("Hello!"), frame.area
-))
+def ui(frame):
+    frame.render_widget(
+        Paragraph.from_string("Hello!"),
+        frame.area
+    )
+
+run_app(ui, on_key=lambda ev: ev.code == "q")
 
 # Asynchronous
 import asyncio
@@ -831,7 +837,7 @@ class AsyncTerminal:
     async def __aexit__(self, ...) -> bool
     def draw(self, draw_fn: Callable[[Frame], None]) -> None
     async def poll_event(self, timeout_ms: int = 50) -> KeyEvent | None
-    async def events(self, fps: float = 30.0, *, stop_on_quit: bool = True) -> AsyncIterator[KeyEvent | None]
+    async def events(self, fps: float = 30.0, *, stop_on_quit: bool = False) -> AsyncIterator[KeyEvent | None]
     def area(self) -> Rect
     def clear(self) -> None
     def hide_cursor(self) -> None

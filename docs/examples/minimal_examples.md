@@ -201,6 +201,8 @@ with Terminal() as term:
 
 ## 7. Async Reactive
 
+This demo explicitly passes `stop_on_quit=True` so that `q` stops the loop; without that flag you need to handle quitting yourself.
+
 ```python
 # examples/07_async_reactive.py
 import asyncio, random

@@ -94,6 +94,8 @@ with Terminal() as term:
 
 ## Async Quick Start
 
+By default `events()` keeps emitting until you break the loop manually; pass `stop_on_quit=True` to opt into auto-quitting on `q`/Ctrl+C.
+
 ```python
 import asyncio
 from pyratatui import AsyncTerminal, Paragraph, Block, Style, Color

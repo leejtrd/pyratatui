@@ -294,9 +294,10 @@ async def main():
                 )
 
             term.draw(ui)
+            if ev and (ev.code == "q" or (ev.code == "c" and ev.ctrl)):
+                break
             if done:
                 ev2 = term.area()  # keep rendering until user quits
-            # stop_on_quit=True (default) handles 'q'
 
         term.show_cursor()
 
