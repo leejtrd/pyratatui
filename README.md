@@ -192,13 +192,15 @@ run_app(ui)
 
 `Terminal` is the entry point. Use it as a context manager — it saves the terminal state, enters alternate screen mode, enables raw input, and restores everything on exit (even after exceptions).
 
+`frame` is not a global variable and you never construct it yourself. Each call to `term.draw(...)`, `AsyncTerminal.draw(...)`, `run_app(...)`, or `run_app_async(...)` creates a temporary `Frame` for that render pass and passes it into your callback. Use it only inside that callback.
+
 ```python
 with Terminal() as term:
-    term.draw(lambda frame: ...)    # render one frame
+    term.draw(lambda frame: ...)    # pyratatui creates frame and passes it in
     ev = term.poll_event(timeout_ms=50)  # KeyEvent | None
 ```
 
-`Frame` is passed to every render callback. It holds the drawable area and all render methods:
+`Frame` holds the drawable area and all render methods for the current pass:
 
 ```python
 def ui(frame):
@@ -211,19 +213,35 @@ def ui(frame):
 `Layout` divides a `Rect` into child regions using constraints:
 
 ```python
-from pyratatui import Layout, Constraint, Direction
-
-chunks = (
-    Layout()
-    .direction(Direction.Vertical)
-    .constraints([
-        Constraint.length(3),   # fixed 3 rows
-        Constraint.fill(1),     # takes remaining space
-        Constraint.length(1),   # fixed 1 row
-    ])
-    .split(frame.area)
+from pyratatui import (
+    Block,
+    Constraint,
+    Direction,
+    Layout,
+    Paragraph,
+    run_app,
 )
-header, body, footer = chunks
+
+def ui(frame):
+    header, body, footer = (
+        Layout()
+        .direction(Direction.Vertical)
+        .constraints([
+            Constraint.length(3),   # fixed 3 rows
+            Constraint.fill(1),     # takes remaining space
+            Constraint.length(1),   # fixed 1 row
+        ])
+        .split(frame.area)
+    )
+
+    frame.render_widget(Block().bordered().title("Header"), header)
+    frame.render_widget(
+        Paragraph.from_string("Main content").block(Block().bordered().title("Body")),
+        body,
+    )
+    frame.render_widget(Paragraph.from_string("Press q to quit"), footer)
+
+run_app(ui)
 ```
 
 **Constraint types:**
@@ -266,19 +284,25 @@ Color.white()  Color.gray()     Color.dark_gray()
 Text is composed bottom-up: `Span` → `Line` → `Text`:
 
 ```python
-from pyratatui import Text, Line, Span, Style, Color
+from pyratatui import Block, Color, Line, Paragraph, Span, Style, Text, run_app
 
-text = Text([
-    Line([
-        Span("Status: ", Style().bold()),
-        Span("OK", Style().fg(Color.green())),
-        Span("  |  99.9%", Style().fg(Color.cyan())),
-    ]),
-    Line.from_string("Plain text line"),
-    Line.from_string("Right-aligned").right_aligned(),
-])
+def ui(frame):
+    text = Text([
+        Line([
+            Span("Status: ", Style().bold()),
+            Span("OK", Style().fg(Color.green())),
+            Span("  |  99.9%", Style().fg(Color.cyan())),
+        ]),
+        Line.from_string("Plain text line"),
+        Line.from_string("Right-aligned").right_aligned(),
+    ])
 
-frame.render_widget(Paragraph(text).block(Block().bordered()), area)
+    frame.render_widget(
+        Paragraph(text).block(Block().bordered().title("Text Hierarchy")),
+        frame.area,
+    )
+
+run_app(ui)
 ```
 
 ### Key Events
@@ -326,34 +350,111 @@ if ev:
 | `Tabs` | Tabbed navigation bar |
 | `Clear` | Clears a rectangular area (use under popups) |
 
-**Quick examples:**
+**Runnable widget gallery:**
 
 ```python
-# Gauge
-Gauge().percent(75).label("CPU 75%").style(Style().fg(Color.green()))
+from pyratatui import (
+    Block,
+    Color,
+    Constraint,
+    Direction,
+    Gauge,
+    Layout,
+    List,
+    ListItem,
+    ListState,
+    Row,
+    Sparkline,
+    Style,
+    Table,
+    TableState,
+    Tabs,
+    run_app,
+)
 
-# Navigable list
 list_state = ListState()
 list_state.select(0)
-items = [ListItem(s) for s in ["Alpha", "Beta", "Gamma"]]
-frame.render_stateful_list(
-    List(items).highlight_style(Style().fg(Color.yellow()).bold()),
-    area, list_state,
-)
 
-# Table
-header = Row.from_strings(["Name", "Status", "Uptime"])
-rows = [Row.from_strings(["nginx", "✓ running", "14d"]), ...]
-frame.render_stateful_table(
-    Table(rows, [Constraint.fill(1)] * 3, header=header),
-    area, table_state,
-)
+table_state = TableState()
+table_state.select(0)
 
-# Sparkline
-Sparkline().data([10, 40, 20, 80, 55, 90]).max(100).style(Style().fg(Color.cyan()))
+def ui(frame, _list_state=list_state, _table_state=table_state):
+    rows = (
+        Layout()
+        .direction(Direction.Vertical)
+        .constraints([
+            Constraint.length(3),
+            Constraint.length(3),
+            Constraint.fill(1),
+            Constraint.length(5),
+        ])
+        .split(frame.area)
+    )
+    middle = (
+        Layout()
+        .direction(Direction.Horizontal)
+        .constraints([Constraint.percentage(40), Constraint.fill(1)])
+        .split(rows[2])
+    )
 
-# Tabs
-Tabs(["Overview", "Logs", "Config"]).select(1).highlight_style(Style().fg(Color.yellow()))
+    frame.render_widget(
+        Tabs(["Overview", "Logs", "Config"])
+        .select(1)
+        .block(Block().bordered().title("Tabs"))
+        .highlight_style(Style().fg(Color.yellow()).bold()),
+        rows[0],
+    )
+
+    frame.render_widget(
+        Gauge()
+        .percent(75)
+        .label("CPU 75%")
+        .style(Style().fg(Color.green()))
+        .block(Block().bordered().title("Gauge")),
+        rows[1],
+    )
+
+    items = [ListItem(s) for s in ["Alpha", "Beta", "Gamma"]]
+    frame.render_stateful_list(
+        List(items)
+        .block(Block().bordered().title("List"))
+        .highlight_style(Style().fg(Color.yellow()).bold())
+        .highlight_symbol("▶ "),
+        middle[0],
+        _list_state,
+    )
+
+    header = Row.from_strings(["Name", "Status", "Uptime"]).style(
+        Style().fg(Color.cyan()).bold()
+    )
+    table_rows = [
+        Row.from_strings(["nginx", "running", "14d"]),
+        Row.from_strings(["postgres", "running", "21d"]),
+        Row.from_strings(["redis", "degraded", "3h"]),
+    ]
+    frame.render_stateful_table(
+        Table(
+            table_rows,
+            [Constraint.fill(1), Constraint.length(10), Constraint.length(8)],
+            header=header,
+        )
+        .block(Block().bordered().title("Table"))
+        .highlight_style(Style().fg(Color.yellow()).bold())
+        .highlight_symbol("▶ "),
+        middle[1],
+        _table_state,
+    )
+
+    frame.render_widget(
+        Sparkline()
+        .data([10, 40, 20, 80, 55, 90])
+        .max(100)
+        .style(Style().fg(Color.cyan()))
+        .block(Block().bordered().title("Sparkline")),
+        rows[3],
+    )
+
+run_app(ui)
 ```
 
 ### Third-Party Widgets
@@ -378,61 +479,115 @@ Tabs(["Overview", "Logs", "Config"]).select(1).highlight_style(Style().fg(Color.
 | `Checkbox` | `tui-checkbox` | Configurable checkbox widget |
 | `Chart` / `Dataset` / `Axis` | `ratatui` | Multi-dataset cartesian chart (line/scatter/bar) |
 
-**Third-party widget examples:**
+**Third-party widget gallery:**
 
 ```python
-# Popup (stateful / draggable)
-from pyratatui import Popup, PopupState, Style, Color
+from pyratatui import (
+    BarColorMode,
+    BarGraph,
+    BarGraphStyle,
+    Block,
+    CalendarDate,
+    CalendarEventStore,
+    Color,
+    Constraint,
+    Direction,
+    Layout,
+    Monthly,
+    Paragraph,
+    Popup,
+    PopupState,
+    QrCodeWidget,
+    QrColors,
+    Style,
+    TextArea,
+    Tree,
+    TreeItem,
+    TreeState,
+    markdown_to_text,
+    run_app,
+)
 
-popup = Popup("Press any key to dismiss").title("Info").style(Style().bg(Color.blue()))
-state = PopupState()
-frame.render_stateful_popup(popup, frame.area, state)
+popup = Popup("Press q to dismiss").title("Popup").style(Style().bg(Color.blue()))
+popup_state = PopupState()
 
-# TextArea (multi-line editor)
-from pyratatui import TextArea, Terminal
+textarea = TextArea.from_lines(["Hello", "World"])
+textarea.set_block(Block().bordered().title("TextArea"))
 
-ta = TextArea.from_lines(["Hello", "World"])
-ta.set_placeholder_text("Start typing…")
-# inside loop:
-frame.render_textarea(ta, area)
-# forward key events:
-ta.input_key(ev.code, ev.ctrl, ev.alt, ev.shift)
-
-# QR Code
-from pyratatui import QrCodeWidget, QrColors
-qr = QrCodeWidget("https://ratatui.rs").colors(QrColors.Inverted)
-frame.render_qrcode(qr, area)
-
-# Calendar
-from pyratatui import CalendarDate, CalendarEventStore, Monthly
-store = CalendarEventStore.today_highlighted(Style().fg(Color.green()).bold())
-cal = (Monthly(CalendarDate.today(), store)
-       .show_month_header(Style().bold())
-       .show_weekdays_header(Style().italic()))
-frame.render_widget(cal, area)
-
-# Gradient bar graph
-from pyratatui import BarGraph, BarGraphStyle, BarColorMode
-graph = (BarGraph([0.1, 0.4, 0.9, 0.6, 0.8])
-         .bar_style(BarGraphStyle.Braille)
-         .color_mode(BarColorMode.VerticalGradient)
-         .gradient("turbo"))
-frame.render_widget(graph, area)
-
-# Markdown rendering
-from pyratatui import markdown_to_text, Paragraph
-text = markdown_to_text("# Hello\n\n**bold** _italic_ `code`")
-frame.render_widget(Paragraph(text), area)
-
-# Tree widget
-from pyratatui import Tree, TreeItem, TreeState
-items = [
+tree = Tree([
     TreeItem("src", [TreeItem("main.rs"), TreeItem("lib.rs")]),
     TreeItem("Cargo.toml"),
-]
-tree = Tree(items).block(Block().bordered().title(" Files "))
-state = TreeState()
-frame.render_stateful_tree(tree, area, state)
+]).block(Block().bordered().title("Tree"))
+tree_state = TreeState()
+tree_state.select([0])
+
+def ui(frame, _popup_state=popup_state, _ta=textarea, _tree=tree, _tree_state=tree_state):
+    rows = (
+        Layout()
+        .direction(Direction.Vertical)
+        .constraints([
+            Constraint.length(12),
+            Constraint.length(10),
+            Constraint.fill(1),
+        ])
+        .split(frame.area)
+    )
+    top = (
+        Layout()
+        .direction(Direction.Horizontal)
+        .constraints([
+            Constraint.percentage(25),
+            Constraint.percentage(25),
+            Constraint.percentage(25),
+            Constraint.fill(1),
+        ])
+        .split(rows[0])
+    )
+    middle = (
+        Layout()
+        .direction(Direction.Horizontal)
+        .constraints([Constraint.fill(1), Constraint.length(28)])
+        .split(rows[1])
+    )
+
+    qr_block = Block().bordered().title("QR Code")
+    frame.render_widget(qr_block, top[0])
+    frame.render_qrcode(
+        QrCodeWidget("https://ratatui.rs").colors(QrColors.Inverted),
+        qr_block.inner(top[0]),
+    )
+
+    store = CalendarEventStore.today_highlighted(Style().fg(Color.green()).bold())
+    frame.render_widget(
+        Monthly(CalendarDate.today(), store)
+        .block(Block().bordered().title("Calendar"))
+        .show_month_header(Style().bold())
+        .show_weekdays_header(Style().italic()),
+        top[1],
+    )
+
+    graph_block = Block().bordered().title("Bar Graph")
+    frame.render_widget(graph_block, top[2])
+    frame.render_widget(
+        BarGraph([0.1, 0.4, 0.9, 0.6, 0.8])
+        .bar_style(BarGraphStyle.Braille)
+        .color_mode(BarColorMode.VerticalGradient)
+        .gradient("turbo"),
+        graph_block.inner(top[2]),
+    )
+
+    frame.render_stateful_popup(popup, top[3], _popup_state)
+
+    frame.render_widget(
+        Paragraph(markdown_to_text("# Hello\n\n**bold** _italic_ `code`"))
+        .block(Block().bordered().title("Markdown")),
+        middle[0],
+    )
+    frame.render_stateful_tree(_tree, middle[1], _tree_state)
+
+    frame.render_textarea(_ta, rows[2])
+
+run_app(ui)
 ```
 
 ---
@@ -781,15 +936,40 @@ class Block:
 ### Prompts
 
 ```python
+from pyratatui import (
+    Terminal,
+    TextPrompt,
+    TextState,
+    prompt_password,
+    prompt_text,
+)
+
 # Blocking single-line text prompt (runs its own event loop)
 value: str | None = prompt_text("Enter your name: ")
 password: str | None = prompt_password("Password: ")
 
 # Stateful inline prompts
 state = TextState()
-frame.render_text_prompt(TextPrompt("Search: "), area, state)
+state.focus()
+
+with Terminal() as term:
+    term.hide_cursor()
+
+    while state.is_pending():
+        def ui(frame, _state=state):
+            frame.render_text_prompt(TextPrompt("Search: "), frame.area, _state)
+
+        term.draw(ui)
+        ev = term.poll_event(timeout_ms=50)
+        if ev:
+            state.handle_key(ev)
+
+    term.show_cursor()
+
 if state.is_complete():
     print(state.value())
+elif state.is_aborted():
+    print("Prompt aborted.")
 ```
 
 ### Exceptions
