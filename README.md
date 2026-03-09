@@ -49,9 +49,9 @@
     <td align="center" width="33%"><img src="https://raw.githubusercontent.com/pyratatui/pyratatui/main/gallery/snip_15.png" alt="ScrollView" width="100%"/></td>
   </tr>
   <tr>
-    <td align="center" width="33%"><img src="https://raw.githubusercontent.com/pyratatui/pyratatui/main/gallery/snip_16.png" alt="Scrollable popup" width="100%"/></td>
-    <td align="center" width="33%"><img src="https://raw.githubusercontent.com/pyratatui/pyratatui/main/gallery/snip_17.png" alt="TextArea editor" width="100%"/></td>
-    <td align="center" width="33%"><img src="https://raw.githubusercontent.com/pyratatui/pyratatui/main/gallery/snip_18.png" alt="ScrollView" width="100%"/></td>
+    <td align="center" width="33%"><img src="https://raw.githubusercontent.com/pyratatui/pyratatui/main/gallery/snip_16.png" alt="PieChart" width="100%"/></td>
+    <td align="center" width="33%"><img src="https://raw.githubusercontent.com/pyratatui/pyratatui/main/gallery/snip_17.png" alt="Chart" width="100%"/></td>
+    <td align="center" width="33%"><img src="https://raw.githubusercontent.com/pyratatui/pyratatui/main/gallery/snip_18.png" alt="Menu" width="100%"/></td>
   </tr>
 </table>
 
