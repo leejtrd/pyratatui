@@ -4,13 +4,13 @@
 
 **Professional Python bindings for [ratatui](https://ratatui.rs) 0.30 — powered by Rust & PyO3**
 
-[![PyPI version](https://img.shields.io/pypi/v/pyratatui?color=orange&logo=pypi&logoColor=white)](https://pypi.org/project/pyratatui/)
-[![Python](https://img.shields.io/pypi/pyversions/pyratatui?logo=python&logoColor=white)](https://pypi.org/project/pyratatui/)
-[![License: MIT](https://img.shields.io/badge/license-MIT-green?logo=opensourceinitiative&logoColor=white)](LICENSE)
-[![Ratatui](https://img.shields.io/badge/ratatui-0.30-blueviolet?logo=rust&logoColor=white)](https://github.com/ratatui/ratatui)
-[![PyO3](https://img.shields.io/badge/PyO3-0.28-blue?logo=rust)](https://pyo3.rs)
-[![Platforms](https://img.shields.io/badge/platform-Linux%20%7C%20macOS%20%7C%20Windows-aqua)](https://github.com/pyratatui/pyratatui)
-[![asyncio](https://img.shields.io/badge/asyncio-ready-teal?logo=python&logoColor=white)](https://docs.python.org/3/library/asyncio.html)
+[![PyPI](https://img.shields.io/badge/PyPI-pyratatui-orange?style=for-the-badge&logo=pypi&logoColor=white)](https://pypi.org/project/pyratatui/)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python&logoColor=white)](https://pypi.org/project/pyratatui/)
+[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](LICENSE)
+[![Ratatui](https://img.shields.io/badge/Ratatui-0.30-blueviolet?style=for-the-badge&logo=rust&logoColor=white)](https://github.com/ratatui/ratatui)
+[![PyO3](https://img.shields.io/badge/PyO3-0.28.2-blue?style=for-the-badge&logo=rust&logoColor=white)](https://pyo3.rs)
+[![Platforms](https://img.shields.io/badge/Platforms-Linux%20%7C%20macOS%20%7C%20Windows-aqua?style=for-the-badge)](https://github.com/pyratatui/pyratatui)
+[![Asyncio](https://img.shields.io/badge/asyncio-ready-teal?style=for-the-badge&logo=python&logoColor=white)](https://docs.python.org/3/library/asyncio.html)
 
 *Build rich, high-performance terminal UIs in Python — with the full power of Rust under the hood.*
 
