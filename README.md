@@ -815,6 +815,12 @@ python examples/07_async_reactive.py
 python examples/08_effects_fade.py
 ```
 
+OR run all of them:
+
+```bash
+python test_all_examples.py
+```
+
 | # | File | Demonstrates |
 |---|---|---|
 | 01 | `01_hello_world.py` | `Terminal`, `Paragraph`, `Block`, `Style`, `Color` |
