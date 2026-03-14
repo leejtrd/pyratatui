@@ -2,6 +2,6 @@
 
 from __future__ import annotations
 
-from ._pyratatui import Checkbox
+from .._pyratatui import Checkbox
 
 __all__ = ["Checkbox"]

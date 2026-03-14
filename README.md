@@ -6,6 +6,7 @@
 
 [![PyPI](https://img.shields.io/badge/PyPI-pyratatui-orange?style=for-the-badge&logo=pypi&logoColor=white)](https://pypi.org/project/pyratatui/)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python&logoColor=white)](https://pypi.org/project/pyratatui/)
+![Downloads](https://img.shields.io/pypi/dm/pyratatui?style=for-the-badge&logo=python&label=downloads)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](LICENSE)
 [![Ratatui](https://img.shields.io/badge/Ratatui-0.30-blueviolet?style=for-the-badge&logo=rust&logoColor=white)](https://github.com/ratatui/ratatui)
 [![PyO3](https://img.shields.io/badge/PyO3-0.28.2-blue?style=for-the-badge&logo=rust&logoColor=white)](https://pyo3.rs)
@@ -98,7 +99,7 @@ pip install pyratatui
 Pre-built wheels are published to PyPI for:
 
 - Linux x86\_64 (manylinux2014)
-- Linux x86\_64 and aarch64 (musllinux\_1\_2) (starting from 0.2.3)
+- Linux x86\_64 and aarch64 (musllinux\_1\_2) (starting from v0.2.3)
 - macOS x86\_64 (starting from v0.2.2) and arm64 (universal2)
 - Windows x86\_64
 

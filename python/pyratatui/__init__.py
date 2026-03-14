@@ -1,9 +1,28 @@
 # ruff: noqa: F403, F405
+"""
+pyratatui — Professional Python bindings for ratatui.
 
-"""Public Python API for pyratatui."""
+Public API is available directly from this top-level package:
+
+    from pyratatui import Terminal, Block, Paragraph, Color, Style
+    from pyratatui import run_app, run_app_async, AsyncTerminal
+    from pyratatui import Layout, Constraint, Direction, Rect, Alignment
+
+Manager subpackage (programmatic access):
+
+    from pyratatui.manager import install_app, list_apps, run_app, uninstall_app
+
+Subpackages for explicit imports:
+
+    from pyratatui.widgets  import Chart, Menu, PieChart, Throbber, ...
+    from pyratatui.layout   import Layout, Constraint, Direction, Rect, Alignment
+    from pyratatui.styling  import Color, Style, Modifier, Span, Line, Text
+    from pyratatui.core     import AsyncTerminal, run_app, run_app_async
+"""
 
 from __future__ import annotations
 
+# ── Rust extension (all native symbols) ──────────────────────────────────────
 from ._pyratatui import *
 from ._pyratatui import (
     Button,
@@ -13,37 +32,50 @@ from ._pyratatui import (
     __ratatui_version__,
     __version__,
 )
+
+# ── Pure-Python modules ───────────────────────────────────────────────────────
 from .async_terminal import AsyncTerminal
-from .chart import Axis, Chart, Dataset, GraphType, LegendPosition, Marker
-from .checkbox import Checkbox
 from .helpers import run_app, run_app_async
-from .menu import Menu, MenuEvent, MenuItem, MenuState
-from .piechart import PieChart, PieData, PieStyle
-from .throbber import Throbber
+
+# ── Widget thin-wrappers (kept at top-level for backwards compat) ─────────────
+from .widgets.chart import Axis, Chart, Dataset, GraphType, LegendPosition, Marker
+from .widgets.checkbox import Checkbox
+from .widgets.menu import Menu, MenuEvent, MenuItem, MenuState
+from .widgets.piechart import PieChart, PieData, PieStyle
+from .widgets.throbber import Throbber
 
 __all__ = [
+    # ── meta ─────────────────────────────────────────────────────────────────
     "__version__",
     "__ratatui_version__",
+    # ── exceptions ────────────────────────────────────────────────────────────
     "PyratatuiError",
     "BackendError",
     "LayoutError",
     "RenderError",
     "AsyncError",
     "StyleError",
+    # ── styling ───────────────────────────────────────────────────────────────
     "Color",
     "Modifier",
     "Style",
     "Span",
     "Line",
     "Text",
+    # ── layout ────────────────────────────────────────────────────────────────
     "Rect",
     "Constraint",
     "Direction",
     "Alignment",
     "Layout",
+    # ── runtime ───────────────────────────────────────────────────────────────
     "Buffer",
     "Terminal",
     "Frame",
+    "AsyncTerminal",
+    "run_app",
+    "run_app_async",
+    # ── core widgets (Rust-native) ─────────────────────────────────────────────
     "Block",
     "BorderType",
     "Paragraph",
@@ -56,6 +88,7 @@ __all__ = [
     "Map",
     "MapResolution",
     "Button",
+    # ── Python-wrapped widgets ─────────────────────────────────────────────────
     "Throbber",
     "Menu",
     "MenuItem",
@@ -71,6 +104,7 @@ __all__ = [
     "GraphType",
     "Marker",
     "LegendPosition",
+    # ── extended Rust widgets ──────────────────────────────────────────────────
     "TreeItem",
     "Tree",
     "TreeState",
@@ -95,9 +129,6 @@ __all__ = [
     "TuiLoggerWidget",
     "TuiWidgetState",
     "markdown_to_text",
-    "AsyncTerminal",
-    "run_app",
-    "run_app_async",
 ]
 
 __all__ = sorted(__all__)

@@ -2,6 +2,6 @@
 
 from __future__ import annotations
 
-from ._pyratatui import Throbber
+from .._pyratatui import Throbber
 
 __all__ = ["Throbber"]

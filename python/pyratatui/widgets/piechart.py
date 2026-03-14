@@ -2,6 +2,6 @@
 
 from __future__ import annotations
 
-from ._pyratatui import PieChart, PieData, PieStyle
+from .._pyratatui import PieChart, PieData, PieStyle
 
 __all__ = ["PieChart", "PieData", "PieStyle"]

@@ -2,6 +2,6 @@
 
 from __future__ import annotations
 
-from ._pyratatui import Menu, MenuEvent, MenuItem, MenuState
+from .._pyratatui import Menu, MenuEvent, MenuItem, MenuState
 
 __all__ = ["Menu", "MenuItem", "MenuState", "MenuEvent"]
