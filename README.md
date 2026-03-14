@@ -808,7 +808,7 @@ python main.py
 
 ```bash
 pyratatui version
-# PyRatatui 0.2.4
+# PyRatatui 0.2.5
 ```
 
 ---
